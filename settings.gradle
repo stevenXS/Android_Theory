@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Android_Theory"
 include ':app'
 include ':handler_demo'
+include ':broadcast_receiver_demo'

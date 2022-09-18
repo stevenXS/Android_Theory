@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,41 +21,32 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HandlerMainActivity extends AppCompatActivity {
-    private ImageView imageView;
-    private Message msg;
-    private Bundle bundle;
-    private Handler mHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageView = (ImageView) findViewById(R.id.img_view);
+        // 当前线程向子线程传递的Looper就不等价于主线程的Looper
+        new HandlerChildThread(new MyHandler(Looper.myLooper())).start();
+    }
 
-        // 主线程定时给子线程发送消息
-        // 开启子线程
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Looper.myLooper(): 表示的是当前线程维护的Looper对象；
-                // Looper.getMainLooper()：表示的是整个App维护的Looper对象，仅有一个；
-                mHandler = new HandlerImage(Looper.getMainLooper());
+    class MyHandler extends Handler{
+        public MyHandler(Looper mainLooper) {
+            super(mainLooper);
+        }
 
-                // set timer that with 200ms period.
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        msg = new Message();
-                        bundle = new Bundle();
-                        msg.what = 0x123;
-                        bundle.putInt("iv",123);
-                        msg.setData(bundle);
-                        mHandler.sendMessage(msg);
-                    }
-                },0,200);
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 0x123:
+                    String value1 = msg.getData().getString("msg");
+                    Log.d("主线程 msg#",value1);
+                    break;
+                case 0x00:
+                    String value2 = msg.getData().getString("msg");
+                    Log.d("主线程 msg#",value2);
+                    break;
             }
-        }).start();
-
-
+        }
     }
 }
