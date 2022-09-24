@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".seekbar_demo.SeekBarMainActivity">
+
+    <!--星星评分条；继承于ProgressBar-->
+    <!--
+    属性介绍：
+        android:numStars="5" # 星星的数量
+        android:rating="0.2" # 默认值（浮点型）
+        android:stepSize="0.5" # 步进值（浮点型）
+        android:isIndicator="false" # 指示器: true-仅提示作用；false-用户可点击
+    -->
+    <RatingBar
+        android:id="@+id/my_ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="0.2"
+        android:stepSize="0.5"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"/>
+</LinearLayout>

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/broadcast_receiver_demo" />
             <option value="$PROJECT_DIR$/handler_demo" />
+            <option value="$PROJECT_DIR$/ui_demo" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
