@@ -3,22 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
     <fragment
-        android:name="com.steven.fragment_demo.LeftFragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:id="@+id/left_fragment"
-        />
-
-    <fragment
-        android:name="com.steven.fragment_demo.RightFragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:id="@+id/right_fragment"
-        />
+        android:id="@+id/news_title_fragment"
+        android:name="com.steven.fragment_demo.news_demo.FragmentNewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

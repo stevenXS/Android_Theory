@@ -20,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void customBroadcastIntent(){
         myReceiver = new MyReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.steven.CUSTOM_START");
-        Intent intent = new Intent();
-        intent.setAction("com.steven.CUSTOM_START");
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction("com.steven.CUSTOM_START");
+//        Intent intent = new Intent();
+//        intent.setAction("com.steven.CUSTOM_START");
 
-        registerReceiver(myReceiver, filter);
+//        registerReceiver(myReceiver, filter);
+        registerReceiver(myReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
 //        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-        sendBroadcast(intent);
+//        sendBroadcast(intent);
     }
 }

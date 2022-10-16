@@ -34,6 +34,6 @@ public class HandlerChildThread2 extends Thread {
                 msg.setData(bundle);
                 mHandler.sendMessage(msg);
             }
-        },0,500);
+        },0,5000);
     }
 }

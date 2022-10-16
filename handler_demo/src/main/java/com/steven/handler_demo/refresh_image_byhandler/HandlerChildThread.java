@@ -35,7 +35,7 @@ public class HandlerChildThread extends Thread {
                 msg.setData(bundle);
                 mHandler.sendMessage(msg);
             }
-        },0,1000);
+        },0,10000);
     }
 
     // 创建一个Handler来处理线程2的消息

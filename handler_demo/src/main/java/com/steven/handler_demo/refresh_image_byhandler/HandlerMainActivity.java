@@ -40,7 +40,8 @@ public class HandlerMainActivity extends AppCompatActivity {
             switch (msg.what){
                 case 0x123:
                     String value1 = msg.getData().getString("msg");
-                    Log.d("主线程 msg#",value1);
+                    Toast.makeText(HandlerMainActivity.this,value1,Toast.LENGTH_SHORT).show();
+//                    Log.d("主线程 msg#",value1);
                     break;
                 case 0x00:
                     String value2 = msg.getData().getString("msg");
