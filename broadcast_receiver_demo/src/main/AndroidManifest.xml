@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,30 +11,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Theory">
-<!--        <receiver-->
-<!--            android:name=".MyReceiver"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--&lt;!&ndash;                <action android:name="android.intent.action.BOOT_COMPLETED"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <action android:name="android.intent.action.REBOOT"/>&ndash;&gt;-->
-<!--                <action android:name="com.steven.CUSTOM_START"/>-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
+        <receiver
+            android:name=".NetworkMonitorBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
 
+        </receiver>
+        <!-- <receiver -->
+        <!-- android:name=".MyReceiver" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- &lt;!&ndash;                <action android:name="android.intent.action.BOOT_COMPLETED"/>&ndash;&gt; -->
+        <!-- &lt;!&ndash;                <action android:name="android.intent.action.REBOOT"/>&ndash;&gt; -->
+        <!-- <action android:name="com.steven.CUSTOM_START"/> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
         <activity
-            android:name=".MainActivity"
+            android:name=".case_force_offline.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".case_force_offline.MyMainActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

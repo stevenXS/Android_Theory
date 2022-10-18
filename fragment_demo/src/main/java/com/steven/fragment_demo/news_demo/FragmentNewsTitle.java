@@ -87,8 +87,9 @@ public class FragmentNewsTitle extends Fragment {
                         // 双页模式
                         FragmetNewsContent fragment=(FragmetNewsContent) getFragmentManager().findFragmentById(R.id.news_content_fragment);
                         fragment.refresh(bean.getTitle(), bean.getContent());
+                        this.notifyAll();
                     }else{
-                        // 单页模式
+                        // 单页模式：点击recycleview的item并通过activity跳转
                         ActivitySinglePageNewsContent.actionStart(getContext(), bean.getTitle(), bean.getContent());
                     }
                 }

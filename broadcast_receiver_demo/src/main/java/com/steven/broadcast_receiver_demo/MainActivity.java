@@ -10,12 +10,17 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
     private MyReceiver myReceiver;
+    private static String INTENT_FILTER = "android.net.conn.CONNECTIVITY_CHANGE";
+    private IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        customBroadcastIntent();
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(INTENT_FILTER);
+        registerReceiver(new NetworkMonitorBroadcastReceiver(), intentFilter);
+        //        customBroadcastIntent();
     }
 
     public void customBroadcastIntent(){
