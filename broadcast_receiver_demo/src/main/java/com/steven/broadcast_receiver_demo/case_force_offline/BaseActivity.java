@@ -61,7 +61,9 @@ public class BaseActivity extends AppCompatActivity {
                     context.startActivity(new Intent(context, LoginActivity.class));
                 }
             });
-            builder.show();
+            
+            builder.show(); // 异步调用
+
         }
     }
 }

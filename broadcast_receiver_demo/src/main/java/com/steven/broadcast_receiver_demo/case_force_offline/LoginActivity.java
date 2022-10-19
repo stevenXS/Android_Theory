@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity{
                 String password = passwordEdit.getText().toString();
                 if (account.equals("admin") && password.equals("123456")){
                     startActivity(new Intent(LoginActivity.this, MyMainActivity.class));
-//                    finish();
+                    finish();
                 }else {
                     Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                 }
