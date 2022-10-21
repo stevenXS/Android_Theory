@@ -13,10 +13,11 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Android_Theory"
-include ':app'
 include ':handler_demo'
 include ':broadcast_receiver_demo'
 include ':ui_demo'
 include ':fragment_demo'
 include ':async_demo'
 include ':database_demo'
+include ':content_provider_demo'
+include ':permission_demo'
