@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">notification_demo</string>
+    <string name="channel_name">steven_channel</string>
+    <string name="channel_description">my_desc</string>
+    <string name="send_intent">send_intent</string>
 </resources>

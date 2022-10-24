@@ -8,8 +8,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Theory">
+        <receiver
+            android:name=".MyBroadCastReveiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".NotificationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
