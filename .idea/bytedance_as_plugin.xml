@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="mboxProjectView">
+    <option name="contentRoots">
+      <list>
+        <option value="$PROJECT_DIR$/handler_demo" />
+        <option value="$PROJECT_DIR$/async_demo" />
+        <option value="$PROJECT_DIR$/broadcast_receiver_demo" />
+        <option value="$PROJECT_DIR$/permission_demo" />
+        <option value="$PROJECT_DIR$/ui_demo" />
+        <option value="$PROJECT_DIR$/notification_demo" />
+        <option value="$PROJECT_DIR$/database_demo" />
+        <option value="$PROJECT_DIR$" />
+        <option value="$PROJECT_DIR$/content_provider_demo" />
+        <option value="$PROJECT_DIR$/fragment_demo" />
+      </list>
+    </option>
+  </component>
+</project>
