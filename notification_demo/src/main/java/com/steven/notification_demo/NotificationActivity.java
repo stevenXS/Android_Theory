@@ -58,7 +58,8 @@ public class NotificationActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("name","steven");
             intent.putExtras(bundle);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+            // Android31+需要加上标志位PendingIntent.FLAG_MUTABLE
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE);
             // 配置通知
             Notification builder = new NotificationCompat.Builder(context, channel_id)
                     .setContentTitle("Notification Title")
