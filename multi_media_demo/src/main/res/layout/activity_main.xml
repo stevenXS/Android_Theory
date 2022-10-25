@@ -5,10 +5,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".CameraMainActivity">
 
     <Button
         android:id="@+id/open_camera"
+        android:text="take camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

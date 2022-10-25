@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Theory">
         <activity
-            android:name=".MainActivity"
+            android:name=".CameraMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <provider
+            android:grantUriPermissions="true"
+            android:exported="false"
+            android:authorities="com.steven.fileprovider"
+            android:name="androidx.core.content.FileProvider">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path"/>
+        </provider>
     </application>
 
 </manifest>
