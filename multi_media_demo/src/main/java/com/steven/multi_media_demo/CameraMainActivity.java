@@ -33,11 +33,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class CameraMainActivity extends AppCompatActivity {
-    public static final int TAKE_PHOTO = 1;
-    public static final int CHOOSE_PHOTO = 2;
+    public static final int TAKE_PHOTO = 11;
+    public static final int CHOOSE_PHOTO = 21;
     public static final int REQUEST_CODE = 20;
     private Uri imageUri;
     private ImageView picture;
+    private static final String TAG = "CameraMainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class CameraMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+                Log.d(TAG, "abs path: "+outputImage.getAbsolutePath());
                 try {
                     if (outputImage.exists()){
                         outputImage.delete();
@@ -86,7 +88,7 @@ public class CameraMainActivity extends AppCompatActivity {
 
     // open the album
     private void openAlbum() {
-        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, CHOOSE_PHOTO);
     }
@@ -110,7 +112,7 @@ public class CameraMainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+        switch (resultCode) {
             case TAKE_PHOTO:
                 try {
                     // cache the picture taken by camera.
@@ -128,6 +130,7 @@ public class CameraMainActivity extends AppCompatActivity {
                         handleImageBeforeKitKot(data);
                     }
                 }
+                Log.d(TAG, "result code is "+resultCode);
             default:
                 break;
         }
@@ -149,19 +152,22 @@ public class CameraMainActivity extends AppCompatActivity {
             if ("com.android.providers.media.documents".equals(uri.getAuthority())){
                 // verify package name for provider.
                 String id = documentId.split(":")[1];
-                Log.d("photo", "id is " + id);
+                Log.d(TAG, "id is " + id);
                 String selection = MediaStore.Images.Media._ID + "=" + id;
-                Log.d("photo", "selection is " + selection);
+                Log.d(TAG, "selection is " + selection);
                 imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+                Log.d(TAG, "path is " + imagePath + uri.getAuthority());
             }else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())){
                 Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(documentId));
                 imagePath = getImagePath(contentUri, null);
-                Log.d("photo", "path is " + imagePath);
+                Log.d(TAG, "path is " + imagePath + uri.getAuthority());
             }
         }else if ("content".equalsIgnoreCase(uri.getScheme())){
             imagePath = getImagePath(uri, null);
+            Log.d(TAG, "path is " + imagePath + uri.getScheme());
         }else if ("file".equalsIgnoreCase(uri.getScheme())){
             imagePath = getImagePath(uri, null);
+            Log.d(TAG, "path is " + imagePath + uri.getScheme());
         }
         displayImage(imagePath);
     }
