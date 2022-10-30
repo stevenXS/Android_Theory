@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/notification_demo" />
             <option value="$PROJECT_DIR$/permission_demo" />
             <option value="$PROJECT_DIR$/ui_demo" />
+            <option value="$PROJECT_DIR$/webview_demo" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
