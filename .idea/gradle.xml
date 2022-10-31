@@ -18,10 +18,10 @@
             <option value="$PROJECT_DIR$/fragment_demo" />
             <option value="$PROJECT_DIR$/handler_demo" />
             <option value="$PROJECT_DIR$/multi_media_demo" />
+            <option value="$PROJECT_DIR$/network_demo" />
             <option value="$PROJECT_DIR$/notification_demo" />
             <option value="$PROJECT_DIR$/permission_demo" />
             <option value="$PROJECT_DIR$/ui_demo" />
-            <option value="$PROJECT_DIR$/webview_demo" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
