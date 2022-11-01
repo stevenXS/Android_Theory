@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/network_demo" />
             <option value="$PROJECT_DIR$/notification_demo" />
             <option value="$PROJECT_DIR$/permission_demo" />
+            <option value="$PROJECT_DIR$/service_demo" />
             <option value="$PROJECT_DIR$/ui_demo" />
           </set>
         </option>
