@@ -1,4 +1,4 @@
-package com.steven.service_demo;
+package com.steven.service_demo.handler_demo;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.steven.service_demo.R;
 
 public class HandlerActivityDemo extends AppCompatActivity {
     public static final int UPDATE = 1;
