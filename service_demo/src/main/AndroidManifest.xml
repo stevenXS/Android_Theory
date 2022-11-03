@@ -23,6 +23,11 @@
         </activity>
 
         <service
+            android:name=".service_demo.MyFrontService"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <service
             android:name=".service_demo.MyServiceDemo"
             android:enabled="true"
             android:exported="true" >

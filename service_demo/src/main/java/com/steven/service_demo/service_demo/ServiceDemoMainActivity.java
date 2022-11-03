@@ -38,6 +38,8 @@ public class ServiceDemoMainActivity extends AppCompatActivity {
         Button stop = findViewById(R.id.stop_service);
         Button bind = findViewById(R.id.bind_service);
         Button unbind = findViewById(R.id.unbind_service);
+        Button bind_front = findViewById(R.id.bind_front_service);
+        Button unbind_front = findViewById(R.id.unbind_front_service);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,22 @@ public class ServiceDemoMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 unbindService(connection);
+            }
+        });
+
+        bind_front.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ServiceDemoMainActivity.this, MyFrontService.class);
+                startService(intent);
+            }
+        });
+
+        unbind_front.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ServiceDemoMainActivity.this, MyFrontService.class);
+                stopService(intent);
             }
         });
     }
