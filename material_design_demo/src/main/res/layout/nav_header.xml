@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/design_default_color_primary"
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
+    <!--显示圆形图片-->
+    <com.mikhaellopez.circleview.CircleView
+        android:id="@+id/icon_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="UserName"
+        android:textSize="14sp"
+        android:background="#fff"/>
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/username"
+        android:text="Main"
+        android:textSize="14sp"
+        android:background="#fff"/>
+
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--永远显示-->
+    <item
+        android:id="@+id/backup"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Backup"
+        app:showAsAction="always"/>
+    <!--空间够则显示-->
+    <item
+        android:id="@+id/delete"
+        android:icon="?attr/actionModeCopyDrawable"
+        android:title="Delete"
+        app:showAsAction="ifRoom"/>
+    <!--不显示-->
+    <item
+        android:id="@+id/settings"
+        android:icon="?android:attr/listChoiceIndicatorSingle"
+        android:title="settings"
+        app:showAsAction="never"/>
+</menu>
