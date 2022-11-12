@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TopBar">
+        <attr name="android:textSize" value="30sp"/>
+    </declare-styleable>
+
+    <style name="text_view">
+        <item name="android:textSize">20dp</item>
+    </style>
+</resources>

@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/async_demo" />
             <option value="$PROJECT_DIR$/broadcast_receiver_demo" />
             <option value="$PROJECT_DIR$/content_provider_demo" />
+            <option value="$PROJECT_DIR$/custom_view_demo" />
             <option value="$PROJECT_DIR$/database_demo" />
             <option value="$PROJECT_DIR$/fragment_demo" />
             <option value="$PROJECT_DIR$/handler_demo" />
