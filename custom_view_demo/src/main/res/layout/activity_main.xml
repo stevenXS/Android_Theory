@@ -14,4 +14,17 @@
         style="@style/text_view"
         android:text="Hello World"/>
 
+    <com.steven.custom_view_demo.ViewGroupA
+        android:text="Hello"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.steven.custom_view_demo.ViewGroupB
+            android:text="HelloA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.steven.custom_view_demo.ViewGroupA>
+
+
 </LinearLayout>
