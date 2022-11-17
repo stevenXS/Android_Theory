@@ -4,13 +4,16 @@
     <option name="contentRoots">
       <list>
         <option value="$PROJECT_DIR$/handler_demo" />
+        <option value="$PROJECT_DIR$/custom_view_demo" />
         <option value="$PROJECT_DIR$/broadcast_receiver_demo" />
         <option value="$PROJECT_DIR$/permission_demo" />
         <option value="$PROJECT_DIR$/ui_demo" />
-        <option value="$PROJECT_DIR$/native_demo" />
+        <option value="$PROJECT_DIR$/aidl_demo" />
         <option value="$PROJECT_DIR$/notification_demo" />
         <option value="$PROJECT_DIR$/database_demo" />
+        <option value="$PROJECT_DIR$/socket_demo" />
         <option value="$PROJECT_DIR$/content_provider_demo" />
+        <option value="$PROJECT_DIR$/material_design_demo" />
         <option value="$PROJECT_DIR$/network_demo" />
         <option value="$PROJECT_DIR$/async_demo" />
         <option value="$PROJECT_DIR$/service_demo" />
