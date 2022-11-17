@@ -53,7 +53,7 @@ public class ClientActivity extends AppCompatActivity {
                 // 这个错误是因为模拟器默认把127.0.0.1和localhost当做本身，那么我们可以在模拟器上用10.0.2.2代替127.0.0.1和localhost，
                 // 另外如果是在局域网环境可以用 192.168.0.x或者192.168.1.x(根据具体配置)连接本机,这样也不会报错
                 socket = new Socket();
-                socket.connect(new InetSocketAddress("192.168.0.113",8081));
+                socket.connect(new InetSocketAddress("localhost",8081));
 
                 // send msg to server
                 pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));

@@ -16,8 +16,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
-            android:name=".ipc_demo.FirstActivity"
+            android:name=".child_handlerthread.HandlerCSActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,6 +2,7 @@ package com.steven.handler_demo.refresh_image_byhandler;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
@@ -16,12 +17,10 @@ public class HandlerChildThread2 extends Thread {
 
     public HandlerChildThread2(Handler Handler) {
         this.mHandler = Handler;
-
     }
 
     @Override
     public void run() {
-//        Looper.prepare();
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
