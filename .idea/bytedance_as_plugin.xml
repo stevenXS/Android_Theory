@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/handler_demo" />
         <option value="$PROJECT_DIR$/custom_view_demo" />
+        <option value="$PROJECT_DIR$/recurring_bug_demo" />
         <option value="$PROJECT_DIR$/broadcast_receiver_demo" />
         <option value="$PROJECT_DIR$/permission_demo" />
         <option value="$PROJECT_DIR$/ui_demo" />
