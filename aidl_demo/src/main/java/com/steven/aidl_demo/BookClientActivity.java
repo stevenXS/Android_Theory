@@ -23,19 +23,6 @@ import java.util.List;
 public class BookClientActivity extends AppCompatActivity {
     private static final String TAG = "BookClientActivity";
     private IBookManager mRemoteManager;
-    private Handler mHandler = new Handler(Looper.myLooper()){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            switch (msg.what){
-                case 123:
-                    Book book = (Book) msg.obj;
-                    Log.d(TAG,"get new Book from service id# " + book.getName() + ", " + Thread.currentThread().getName());
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
     private Button btn;
 
     @Override
@@ -97,4 +84,20 @@ public class BookClientActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * handler处理消息
+     */
+    private Handler mHandler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 123:
+                    Book book = (Book) msg.obj;
+                    Log.d(TAG,"get new Book from service id# " + book.getName() + ", " + Thread.currentThread().getName());
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }
