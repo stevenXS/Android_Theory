@@ -18,32 +18,47 @@ import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Object object = new Object();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
-                    while (interfaces.hasMoreElements()){
-                        NetworkInterface nextElement = interfaces.nextElement();
-                        Enumeration<InetAddress> inetAddresses = nextElement.getInetAddresses();
-                        while (inetAddresses.hasMoreElements()){
-                            InetAddress address = inetAddresses.nextElement();
-                            if (address instanceof Inet6Address){
-                                Log.d("address",address.getHostAddress());
-                            }
-                        }
+                synchronized (object){
+                    try {
+                        Log.d("aaa","aaaaaaaaa");
+                        object.wait(5000);
+                        Log.d("aaa","ccccccccc");
+
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-                } catch (SocketException e) {
-                    e.printStackTrace();
                 }
             }
         }).start();
 
+        try {
+            Thread.sleep(200);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (object){
+                    try {
+                        Log.d("bbb","bbb");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+
     }
+
 }
