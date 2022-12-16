@@ -39,3 +39,4 @@ include ':recurring_bug_demo'
 include ':kotlin_demo'
 include ':test_demo'
 
+include ':gradle_demo'
