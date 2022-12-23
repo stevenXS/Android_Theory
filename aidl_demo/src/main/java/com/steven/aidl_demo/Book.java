@@ -54,7 +54,7 @@ public class Book implements Parcelable {
     }
 
     /**
-     * 将传入的数据写入到序列化缓冲区
+     * 将数据写入到序列化缓冲区
      * @param dest
      * @param flags
      */
