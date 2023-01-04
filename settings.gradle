@@ -40,3 +40,4 @@ include ':kotlin_demo'
 include ':test_demo'
 
 include ':gradle_demo'
+include ':multi_flavor_demo_test'
