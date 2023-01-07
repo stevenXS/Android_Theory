@@ -6,18 +6,18 @@ pluginManagement {
         mavenCentral()
     }
 }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        // 项目中依赖的地址
-        google()
-        mavenCentral()
-        // 增加项目的国内源
-        maven{ url 'https://maven.aliyun.com/repository/central' }
-        maven{ url 'https://maven.aliyun.com/repository/public' }
-        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
-    }
-}
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        // 项目中依赖的地址
+//        google()
+//        mavenCentral()
+//        // 增加项目的国内源
+//        maven{ url 'https://maven.aliyun.com/repository/central' }
+//        maven{ url 'https://maven.aliyun.com/repository/public' }
+//        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
+//    }
+//}
 rootProject.name = "Android_Theory"
 include ':handler_demo'
 include ':broadcast_receiver_demo'
