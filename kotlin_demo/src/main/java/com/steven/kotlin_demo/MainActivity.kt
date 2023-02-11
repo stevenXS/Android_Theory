@@ -2,8 +2,7 @@ package com.steven.kotlin_demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import androidx.activity.R
+import android.widget.TextView
 import com.steven.kotlin_demo.construtor.Student
 import kotlinx.coroutines.*
 import kotlin.math.max
@@ -11,7 +10,10 @@ import kotlin.math.max
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.notification_action)
+        setContentView(R.layout.activity_main)
+        val show_res = findViewById<TextView>(R.id.show_res)
+        show_res.setText("aaaaaaaaaaaaaaaa")
+
         // 主、次构造函数
         val student1 = Student() // 调用第二个次构造函数
         val student2 = Student("steven",12) // 调用第一个次构造函数

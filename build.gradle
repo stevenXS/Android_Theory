@@ -1,13 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.5.21'
     repositories {
-        google()
-        mavenCentral()
+        mavenLocal() // 本地的Maven仓库
+        google() // Google远程仓库
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
     }
 }
 
@@ -24,10 +30,13 @@ allprojects {
         google() // Google远程仓库
         mavenCentral() //
         mavenLocal() // 本地的Maven仓库
+        jcenter()
         // 指定url的仓库
-        maven{ url 'https://maven.aliyun.com/repository/central' }
-        maven{ url 'https://maven.aliyun.com/repository/public' }
-        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
     }
 }
 

@@ -1,11 +1,11 @@
-package com.steven.kotlin_demo.coroutines
+package com.steven.jetpack_demo
 
-import android.os.Bundle
-import androidx.activity.R
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
-class CoroutinesActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
 }
