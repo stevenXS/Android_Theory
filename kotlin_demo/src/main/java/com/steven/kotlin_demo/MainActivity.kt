@@ -2,17 +2,21 @@ package com.steven.kotlin_demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import com.steven.kotlin_demo.commonActivity.CommonActivity
 import com.steven.kotlin_demo.construtor.Student
 import kotlinx.coroutines.*
 import kotlin.math.max
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val show_res = findViewById<TextView>(R.id.show_res)
-        show_res.setText("aaaaaaaaaaaaaaaa")
+
+        addBtn("测试按钮", "abc"){
+            Toast.makeText(this, "aaaa", Toast.LENGTH_SHORT).show()
+        }
 
         // 主、次构造函数
         val student1 = Student() // 调用第二个次构造函数
