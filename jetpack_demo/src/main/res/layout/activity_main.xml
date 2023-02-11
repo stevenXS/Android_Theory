@@ -5,8 +5,20 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/infoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
+    <Button
+        android:id="@+id/plusOneBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plus One"/>
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear One"/>
 </LinearLayout>
