@@ -1,6 +1,5 @@
 package com.steven.kotlin_demo.view
 
-import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -26,7 +23,7 @@ class ViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view)
+        setContentView(R.layout.activity_recycle_view)
         initData()
 
         // list view
@@ -67,7 +64,7 @@ class ViewActivity : AppCompatActivity() {
 
         // 初始化view holder
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.recycle_view, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.recycle_view_fruit, parent, false)
             var myViewHolder = MyViewHolder(view)
             myViewHolder.itemView.setOnClickListener{
                 var position = myViewHolder.adapterPosition

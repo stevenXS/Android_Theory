@@ -45,4 +45,7 @@ dependencies {
     // 协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
+
+    // recycle view
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
