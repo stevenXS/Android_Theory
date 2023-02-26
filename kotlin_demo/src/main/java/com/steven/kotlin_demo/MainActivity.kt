@@ -38,7 +38,6 @@ class MainActivity : CommonActivity() {
          *   每个launch可以视作一个协程块
          *   runBlocking能保证每个协程都被执行
          */
-
         runBlocking {
             launch {
                 println("it's coroutines 1")
