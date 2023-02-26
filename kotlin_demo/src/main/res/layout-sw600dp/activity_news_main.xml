@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--单页模式下仅加载标题fragment-->
+    <fragment
+        android:id="@+id/frag_news_title"
+        android:name="com.steven.kotlin_demo.fragment.NewsTitleFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <!--双页模式-->
+    <FrameLayout
+        android:id="@+id/layout_news_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <fragment
+            android:id="@+id/frag_news_content"
+            android:name="com.steven.kotlin_demo.fragment.NewsContentFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+</LinearLayout>

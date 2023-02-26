@@ -13,13 +13,18 @@ import androidx.annotation.Nullable;
 
 import com.steven.content_provider_demo.database_helper.MyDatabaseHelper;
 
+/**
+ * 内容提供者：一种标准接口，用于跨进程间数据安全的共享
+ */
 public class CustomContentProvider extends ContentProvider {
     private static final int BOOK_DIR = 0;
     private static final int BOOK_ITEM = 1;
     private static final int CATEGORY_DIR = 2;
     private static final int CATEGORY_ITEM = 3;
 
+
     private static UriMatcher uriMatcher;
+    // 指定包名
     private static final String AUTHORITY = "com.steven.content_provider_demo";
     private MyDatabaseHelper databaseHelper;
 

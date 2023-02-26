@@ -1,41 +1,28 @@
-pluginManagement {
-    repositories {
-        // 插件的依赖地址
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        // 项目中依赖的地址
-        google()
-        mavenCentral()
-        // 增加项目的国内源
-        maven{ url 'https://maven.aliyun.com/repository/central' }
-        maven{ url 'https://maven.aliyun.com/repository/public' }
-        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
-    }
-}
 rootProject.name = "Android_Theory"
-include ':handler_demo'
-include ':broadcast_receiver_demo'
-include ':ui_demo'
-include ':fragment_demo'
-include ':async_demo'
-include ':database_demo'
-include ':content_provider_demo'
-include ':permission_demo'
-include ':notification_demo'
-include ':multi_media_demo'
-include ':network_demo'
-include ':service_demo'
-include ':material_design_demo'
-include ':custom_view_demo'
-include ':socket_demo'
-include ':aidl_demo'
-include ':recurring_bug_demo'
-include ':kotlin_demo'
-include ':test_demo'
 
+//include ':handler_demo'
+//include ':broadcast_receiver_demo'
+//include ':ui_demo'
+//include ':fragment_demo'
+//include ':async_demo'
+//include ':database_demo'
+//include ':content_provider_demo'
+//include ':permission_demo'
+//include ':notification_demo'
+//include ':multi_media_demo'
+//include ':network_demo'
+//include ':service_demo'
+//include ':material_design_demo'
+//include ':custom_view_demo'
+//include ':socket_demo'
+//include ':aidl_demo'
+//include ':recurring_bug_demo'
+//include ':test_demo'
+
+include ':kotlin_demo'
+
+
+//include ':gradle_demo'
+//include ':multi_flavor_demo_test'
+//include ':app'
+include ':jetpack_demo'
