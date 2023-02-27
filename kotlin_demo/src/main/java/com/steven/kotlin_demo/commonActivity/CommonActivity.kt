@@ -3,6 +3,7 @@ package com.steven.kotlin_demo.commonActivity
 import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -34,6 +35,7 @@ open class CommonActivity: Activity() {
         if (!TextUtils.isEmpty(desc)){
             val descTv = TextView(this)
             descTv.text = desc
+            descTv.gravity = Gravity.CENTER
             ll_root!!.addView(descTv, lp)
             ll_root!!.addView(View(this), LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,12))
         }

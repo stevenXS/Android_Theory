@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Android_Theory">
 
         <activity
-            android:name=".fragment.NewsMainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +21,13 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".fragment.NewsContentActivity"
             android:exported="true"/>
         <activity
-            android:name=".fragment.NewsContentActivity"
+            android:name=".sqllite.SQLLiteActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".coroutines.CoroutinesActivity"
             android:exported="true"/>
     </application>
 </manifest>
