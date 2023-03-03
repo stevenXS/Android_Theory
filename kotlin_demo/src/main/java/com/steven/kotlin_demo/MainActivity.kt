@@ -1,9 +1,12 @@
 package com.steven.kotlin_demo
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -34,6 +37,18 @@ class MainActivity : CommonActivity() {
 
         addView("Switch", "", Switch(this)){
             startActivity(Intent(this, SQLLiteActivity::class.java))
+        }
+
+        addView("输入APPID", "", Button(this)){
+            val et = EditText(this)
+            AlertDialog.Builder(this)
+                    .setView(et)
+                    .setPositiveButton("true", object: DialogInterface.OnClickListener{
+                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                            Toast.makeText(this@MainActivity, et.text.toString(), Toast.LENGTH_LONG).show()
+                        }
+                    })
+                    .show()
         }
     }
 }

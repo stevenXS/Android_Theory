@@ -6,9 +6,11 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import com.steven.kotlin_demo.R
 import kotlinx.android.synthetic.main.root_layout.*
 
@@ -47,10 +49,15 @@ open class CommonActivity: Activity() {
     fun <T: View>addView(name: String, desc: String, view: T, onClick: ()->Unit ): T {
         if (view is Button){
             view.text = name
+            view.textSize = 20F
         }else if(view is Switch){
             view.text = name
+            view.textSize = 20F
         }else if(view is TextView){
             view.text = name
+            view.textSize = 20F
+        }else if (view is EditText){
+            Toast.makeText(this, view.text.toString(), Toast.LENGTH_LONG).show()
         }
         view.setOnClickListener {
             onClick.invoke()
