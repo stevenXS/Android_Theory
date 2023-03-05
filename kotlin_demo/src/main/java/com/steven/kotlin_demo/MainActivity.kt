@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.steven.kotlin_demo.commonActivity.CommonActivity
 import com.steven.kotlin_demo.coroutines.CoroutinesActivity
+import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
+import com.steven.kotlin_demo.myLazy.later
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
 
 class MainActivity : CommonActivity() {
@@ -49,6 +52,10 @@ class MainActivity : CommonActivity() {
                         }
                     })
                     .show()
+        }
+
+        addView("MyLazy Fun Test", "", Button(this)){
+            startActivity(Intent(this, MyLazyMainActivity::class.java))
         }
     }
 }

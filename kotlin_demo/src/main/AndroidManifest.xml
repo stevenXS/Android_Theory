@@ -29,5 +29,8 @@
         <activity
             android:name=".coroutines.CoroutinesActivity"
             android:exported="true"/>
+        <activity
+            android:name=".myLazy.MyLazyMainActivity"
+            android:exported="true"/>
     </application>
 </manifest>
