@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import com.steven.kotlin_demo.alertDialog.MyDialogActivity
 import com.steven.kotlin_demo.commonActivity.CommonActivity
 import com.steven.kotlin_demo.coroutines.CoroutinesActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
@@ -56,6 +57,10 @@ class MainActivity : CommonActivity() {
 
         addView("MyLazy Fun Test", "", Button(this)){
             startActivity(Intent(this, MyLazyMainActivity::class.java))
+        }
+
+        addView("Dialog", "", Button(this)){
+            startActivity(Intent(this, MyDialogActivity::class.java))
         }
     }
 }

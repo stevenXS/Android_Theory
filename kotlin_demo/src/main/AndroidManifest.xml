@@ -32,5 +32,8 @@
         <activity
             android:name=".myLazy.MyLazyMainActivity"
             android:exported="true"/>
+        <activity
+            android:name=".alertDialog.MyDialogActivity"
+            android:exported="true"/>
     </application>
 </manifest>
