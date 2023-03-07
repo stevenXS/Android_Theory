@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Theory">
-
+        <provider
+            android:authorities="com.steven.kotlin_demo.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -33,7 +40,10 @@
             android:name=".myLazy.MyLazyMainActivity"
             android:exported="true"/>
         <activity
-            android:name=".alertDialog.MyDialogActivity"
+            android:name=".CommonActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".cameraDemo.CameraActivity"
             android:exported="true"/>
     </application>
 </manifest>

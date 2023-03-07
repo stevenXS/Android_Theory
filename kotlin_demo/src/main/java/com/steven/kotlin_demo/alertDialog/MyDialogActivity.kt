@@ -1,11 +1,10 @@
 package com.steven.kotlin_demo.alertDialog
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import com.steven.kotlin_demo.commonActivity.CommonActivity
+import com.steven.kotlin_demo.CommonActivity
 
 class MyDialogActivity(): CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

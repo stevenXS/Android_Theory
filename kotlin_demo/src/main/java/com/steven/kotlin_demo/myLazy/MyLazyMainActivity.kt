@@ -3,7 +3,7 @@ package com.steven.kotlin_demo.myLazy
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import com.steven.kotlin_demo.commonActivity.CommonActivity
+import com.steven.kotlin_demo.CommonActivity
 
 /**
  * 测试自定义lazy函数

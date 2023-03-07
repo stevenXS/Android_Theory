@@ -1,6 +1,7 @@
-package com.steven.kotlin_demo.commonActivity
+package com.steven.kotlin_demo
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Gravity
@@ -11,16 +12,19 @@ import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
-import com.steven.kotlin_demo.R
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.root_layout.*
 
-open class CommonActivity: Activity() {
+open class CommonActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.root_layout)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
     fun addBtn(name: String, desc: String, onClick: ()->Unit ): Button {
         val button = Button(this)
         button.text = name

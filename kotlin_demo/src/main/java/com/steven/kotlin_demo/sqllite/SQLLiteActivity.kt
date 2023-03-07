@@ -3,7 +3,7 @@ package com.steven.kotlin_demo.sqllite
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import com.steven.kotlin_demo.commonActivity.CommonActivity
+import com.steven.kotlin_demo.CommonActivity
 
 class SQLLiteActivity: CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
