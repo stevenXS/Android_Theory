@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.steven.kotlin_demo">
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Theory">
+        <provider
+            android:enabled="true"
+            android:exported="true"
+            android:authorities="com.steven.kotlin_demo"
+            android:name=".content_provider.MyProvider"/>
         <provider
             android:authorities="com.steven.kotlin_demo.fileprovider"
             android:name="androidx.core.content.FileProvider"
@@ -44,6 +52,9 @@
             android:exported="true"/>
         <activity
             android:name=".cameraDemo.CameraActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".content_provider.MyContentProviderActivity"
             android:exported="true"/>
     </application>
 </manifest>

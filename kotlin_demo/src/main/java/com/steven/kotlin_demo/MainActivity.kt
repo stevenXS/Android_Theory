@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.steven.kotlin_demo.alertDialog.MyDialogActivity
 import com.steven.kotlin_demo.cameraDemo.CameraActivity
+import com.steven.kotlin_demo.content_provider.MyContentProviderActivity
 import com.steven.kotlin_demo.coroutines.CoroutinesActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
@@ -61,6 +62,9 @@ class MainActivity : CommonActivity() {
         }
         addView("takePhoto", "", Button(this)){
             startActivity(Intent(this, CameraActivity::class.java))
+        }
+        addView("content_provider", "", Button(this)){
+            startActivity(Intent(this, MyContentProviderActivity::class.java))
         }
     }
 }
