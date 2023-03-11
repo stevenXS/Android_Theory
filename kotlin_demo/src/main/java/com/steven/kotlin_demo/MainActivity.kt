@@ -14,6 +14,7 @@ import com.steven.kotlin_demo.cameraDemo.CameraActivity
 import com.steven.kotlin_demo.content_provider.MyContentProviderActivity
 import com.steven.kotlin_demo.coroutines.CoroutinesActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
+import com.steven.kotlin_demo.service.ServiceMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
 
 class MainActivity : CommonActivity() {
@@ -33,11 +34,11 @@ class MainActivity : CommonActivity() {
         }
 
         // 泛型方法
-        addView("Text", "", TextView(this)){
+        addView("text", "", TextView(this)){
             startActivity(Intent(this, SQLLiteActivity::class.java))
         }
 
-        addView("Switch", "", Switch(this)){
+        addView("switch", "", Switch(this)){
             startActivity(Intent(this, SQLLiteActivity::class.java))
         }
 
@@ -53,11 +54,11 @@ class MainActivity : CommonActivity() {
                     .show()
         }
 
-        addView("MyLazy Fun Test", "", Button(this)){
+        addView("myLazy_fun_test", "", Button(this)){
             startActivity(Intent(this, MyLazyMainActivity::class.java))
         }
 
-        addView("Dialog", "", Button(this)){
+        addView("dialog", "", Button(this)){
             startActivity(Intent(this, MyDialogActivity::class.java))
         }
         addView("takePhoto", "", Button(this)){
@@ -65,6 +66,9 @@ class MainActivity : CommonActivity() {
         }
         addView("content_provider", "", Button(this)){
             startActivity(Intent(this, MyContentProviderActivity::class.java))
+        }
+        addView("service", "", Button(this)){
+            startActivity(Intent(this, ServiceMainActivity::class.java))
         }
     }
 }
