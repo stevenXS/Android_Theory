@@ -51,14 +51,45 @@ class CoroutinesActivity: AppCompatActivity() {
         }
 
         runBlocking {
+            /**
+             * coroutineScope：
+             *  # 会继承外部协程作用域（会阻塞外部协程）并创建协程，相当于Java.join()
+             *  # 其代码块中的协程会并发执行；并优先执行非协程的代码
+             * 上述代码执行完毕后，runBlocking()中的协程是并发执行的
+             */
             coroutineScope {
-                println("it's launch")
+                println("it's launch1")
+                println("it's launch2")
+                launch {
+                    delay(1000)
+                    println("it's launch3")
+                }
+                launch {
+                    delay(200)
+                    println("it's launch4")
+                }
                 launch {
                     for(i in 0..10){
                         println(i)
-                        delay(100)
+                        delay(30)
                     }
+                    println("it's launch5")
                 }
+            }
+            /**
+             * 以下运行是并发操作
+             */
+            launch {
+                delay(2000)
+                println("it's launch6")
+            }
+            launch {
+                delay(1000)
+                println("it's launch7")
+            }
+            launch {
+                delay(500)
+                println("it's launch8")
             }
             println("it's coroutineScope")
         }
