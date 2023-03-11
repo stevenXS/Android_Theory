@@ -43,20 +43,20 @@ class MyContentProviderActivity: CommonActivity() {
         }
         addView("queryData", "", Button(this)){
             val uri = Uri.parse("content://${MyProvider.authority}/book")
-            contentResolver.query(uri, null, null, null, null)?.apply {
+            contentResolver.query(uri, arrayOf("name","author"), "name = ? and price = ?", arrayOf("Steven", "25"), null)?.apply {
                 while (moveToNext()){
                     val name = getString(getColumnIndexOrThrow("name"))
                     val author = getString(getColumnIndexOrThrow("author"))
-                    val pages = getString(getColumnIndexOrThrow("pages"))
-                    val price = getString(getColumnIndexOrThrow("price"))
+//                    val pages = getString(getColumnIndexOrThrow("pages"))
+//                    val price = getString(getColumnIndexOrThrow("price"))
                     toast("name ${getColumnIndexOrThrow("name")}")
                     toast("author ${getColumnIndexOrThrow("author")}")
-                    toast("pages ${getColumnIndexOrThrow("pages")}")
-                    toast("price ${getColumnIndexOrThrow("price")}")
+//                    toast("pages ${getColumnIndexOrThrow("pages")}")
+//                    toast("price ${getColumnIndexOrThrow("price")}")
                     toast("query book name is $name")
                     toast("query book author is $author")
-                    toast("query book pages is $pages")
-                    toast("query book price is $price")
+//                    toast("query book pages is $pages")
+//                    toast("query book price is $price")
                 }
                 close()
             }
@@ -65,9 +65,10 @@ class MyContentProviderActivity: CommonActivity() {
             // 更新数据
             bookId?.let {
                 val uri = Uri.parse("content://${MyProvider.authority}/book/$it")
-                val values = contentValuesOf("name" to "A Storm of Swords",
-                        "pages" to 1216, "price" to 24.05)
+                val values = contentValuesOf("name" to "Steven",
+                        "pages" to 222, "price" to 25.0)
                 contentResolver.update(uri, values, null, null)
+                toast("update row ${bookId} data")
             }
         }
         addView("deleteData", "", Button(this)){
