@@ -16,6 +16,8 @@ import com.steven.kotlin_demo.coroutines.CoroutinesActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
 import com.steven.kotlin_demo.service.ServiceMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
+import com.steven.kotlin_demo.webView.WebViewMainActivity
+import java.util.Objects
 
 class MainActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +71,9 @@ class MainActivity : CommonActivity() {
         }
         addView("service", "", Button(this)){
             startActivity(Intent(this, ServiceMainActivity::class.java))
+        }
+        addView("web_view", "", Button(this)){
+            startActivity(Intent(this, WebViewMainActivity::class.java))
         }
     }
 }
