@@ -16,6 +16,7 @@ import com.steven.kotlin_demo.coroutines.CoroutinesActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
 import com.steven.kotlin_demo.service.ServiceMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
+import com.steven.kotlin_demo.view.MaterialMainActivity
 import com.steven.kotlin_demo.webView.WebViewMainActivity
 import java.util.Objects
 
@@ -74,6 +75,9 @@ class MainActivity : CommonActivity() {
         }
         addView("web_view", "", Button(this)){
             startActivity(Intent(this, WebViewMainActivity::class.java))
+        }
+        addView("material_view", "", Button(this)){
+            startActivity(Intent(this, MaterialMainActivity::class.java))
         }
     }
 }
