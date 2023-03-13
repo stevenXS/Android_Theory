@@ -13,6 +13,8 @@ import com.steven.kotlin_demo.alertDialog.MyDialogActivity
 import com.steven.kotlin_demo.cameraDemo.CameraActivity
 import com.steven.kotlin_demo.content_provider.MyContentProviderActivity
 import com.steven.kotlin_demo.coroutines.CoroutinesActivity
+import com.steven.kotlin_demo.jetPack.lifeCycle.MyObserver
+import com.steven.kotlin_demo.jetPack.viewModel.ViewModelMainActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
 import com.steven.kotlin_demo.service.ServiceMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
@@ -23,6 +25,7 @@ import java.util.Objects
 class MainActivity : CommonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycle.addObserver(MyObserver(lifecycle))
         // 非泛型方法
         addView("测试按钮", "", Button(this)){
             Toast.makeText(this, "aaaa", Toast.LENGTH_SHORT).show()
@@ -78,6 +81,9 @@ class MainActivity : CommonActivity() {
         }
         addView("material_view", "", Button(this)){
             startActivity(Intent(this, MaterialMainActivity::class.java))
+        }
+        addView("jetPack", "", Button(this)){
+            startActivity(Intent(this, ViewModelMainActivity::class.java))
         }
     }
 }
