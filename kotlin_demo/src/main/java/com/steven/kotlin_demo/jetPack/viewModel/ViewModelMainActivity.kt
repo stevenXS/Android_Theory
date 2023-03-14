@@ -21,6 +21,24 @@ class ViewModelMainActivity : CommonActivity() {
             refreshCounter()
         }
         refreshCounter()
+        // switchMap()
+        getUserBtn.setOnClickListener {
+            val userId = (0..1000).random().toString()
+            viewModel.getUser(userId)
+        }
+        viewModel.user.observe(this){
+            infoText.text = it.firstName
+        }
+
+        // <editor-folder desc="map">
+        getUserName.setOnClickListener {
+            val s = (0..100).random().toString()
+            viewModel.getUserName("steven.${s}")
+        }
+        viewModel.userName.observe(this){
+            infoText.text = it
+        }
+        // </editor-folder>
     }
     private fun refreshCounter() {
         infoText.text = viewModel.counter.toString()

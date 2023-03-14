@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".jetPack.viewModel.ViewModelMainActivity">
     <TextView
         android:id="@+id/infoText"
@@ -17,4 +18,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Plus One"/>
+    <Button
+        android:id="@+id/getUserBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="switchMap(userId)"/>
+    <Button
+        android:id="@+id/getUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="map(userName)"/>
 </LinearLayout>
