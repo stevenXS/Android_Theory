@@ -16,6 +16,7 @@ import com.steven.kotlin_demo.coroutines.CoroutinesActivity
 import com.steven.kotlin_demo.jetPack.lifeCycle.MyObserver
 import com.steven.kotlin_demo.jetPack.viewModel.ViewModelMainActivity
 import com.steven.kotlin_demo.myLazy.MyLazyMainActivity
+import com.steven.kotlin_demo.room.RoomMainActivity
 import com.steven.kotlin_demo.service.ServiceMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
 import com.steven.kotlin_demo.view.MaterialMainActivity
@@ -84,6 +85,9 @@ class MainActivity : CommonActivity() {
         }
         addView("jetPack", "", Button(this)){
             startActivity(Intent(this, ViewModelMainActivity::class.java))
+        }
+        addView("room", "", Button(this)){
+            startActivity(Intent(this, RoomMainActivity::class.java))
         }
     }
 }

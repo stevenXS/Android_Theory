@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 33
@@ -55,4 +56,8 @@ dependencies {
 
     // viewModel
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
+    // room：对象映射型数据库，与mybatis有点类似
+    implementation "androidx.room:room-runtime:2.1.0"
+    kapt "androidx.room:room-compiler:2.1.0"
 }

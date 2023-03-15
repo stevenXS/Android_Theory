@@ -17,6 +17,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".room.RoomMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".jetPack.viewModel.ViewModelMainActivity"
             android:exported="false" />
         <activity
