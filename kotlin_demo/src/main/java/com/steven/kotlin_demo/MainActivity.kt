@@ -21,6 +21,7 @@ import com.steven.kotlin_demo.service.ServiceMainActivity
 import com.steven.kotlin_demo.sqllite.SQLLiteActivity
 import com.steven.kotlin_demo.view.MaterialMainActivity
 import com.steven.kotlin_demo.webView.WebViewMainActivity
+import com.steven.kotlin_demo.workManager.WorkManagerMainActivity
 import java.util.Objects
 
 class MainActivity : CommonActivity() {
@@ -60,11 +61,9 @@ class MainActivity : CommonActivity() {
                     })
                     .show()
         }
-
         addView("myLazy_fun_test", "", Button(this)){
             startActivity(Intent(this, MyLazyMainActivity::class.java))
         }
-
         addView("dialog", "", Button(this)){
             startActivity(Intent(this, MyDialogActivity::class.java))
         }
@@ -88,6 +87,9 @@ class MainActivity : CommonActivity() {
         }
         addView("room", "", Button(this)){
             startActivity(Intent(this, RoomMainActivity::class.java))
+        }
+        addView("work_manger", "", Button(this)){
+            startActivity(Intent(this, WorkManagerMainActivity::class.java))
         }
     }
 }
