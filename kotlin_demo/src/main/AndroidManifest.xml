@@ -18,6 +18,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".workManager.WorkManagerMainActivity"
+            android:theme="@style/test_theme"
             android:exported="false" />
         <activity
             android:name=".room.RoomMainActivity"
