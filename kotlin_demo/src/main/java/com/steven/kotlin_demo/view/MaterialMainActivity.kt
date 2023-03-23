@@ -22,11 +22,11 @@ class MaterialMainActivity : CommonActivity() {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.baseline_menu_24)
         }
-//        setSystemBar(this)
+        setSystemBar(this)
     }
 
     fun setSystemBar(activity: Activity){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 增加绘制系统bar的背景图标志（5.0以上使用该标志位）
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS )
             // 同时清除透明状态栏标志（4.4）才使用该标志位

@@ -78,6 +78,7 @@ public class BookManagerService extends Service {
                 int i = bookList.size() + 1;
                 Book new_book = new Book(i, "new book");
                 try {
+                    // 延迟处理，让客户端添加Listener
                     Thread.sleep(2000);
                     notifyAllListeners(new_book);
                 } catch (RemoteException e) {

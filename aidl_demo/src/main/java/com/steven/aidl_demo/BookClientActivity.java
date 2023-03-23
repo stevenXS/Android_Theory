@@ -48,18 +48,18 @@ public class BookClientActivity extends AppCompatActivity {
     }
 
     private ServiceConnection connection = new ServiceConnection() {
+        // 当Service调用onBind()后会回调onServiceConnected()方法
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-//            IBookManager manager = (IBookManager) service; // 同一个进程类的类转换方式
             IBookManager manager = IBookManager.Stub.asInterface(service); // 同一个进程则返回Stub本身，跨进程则返回Stub.Proxy
-            mRemoteManager = manager;
+            mRemoteManager = manager; // 这里调用服务端Service的实现类
 
             try {
-                List<Book> bookList = manager.getBookList();
-                for (Book book : bookList) {
-                    Log.d(TAG, book.getName());
-                }
-
+//                List<Book> bookList = manager.getBookList();
+//                for (Book book : bookList) {
+//                    Log.d(TAG, book.getName());
+//                }
+                Log.d(TAG, "onServiceConnected");
                 manager.registerListener(listener);
             } catch (RemoteException e) {
                 e.printStackTrace();
