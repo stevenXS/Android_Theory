@@ -1,4 +1,4 @@
-package com.steven.test_demo;
+package com.steven.test_demo.activity;
 
 import android.os.Bundle;
 

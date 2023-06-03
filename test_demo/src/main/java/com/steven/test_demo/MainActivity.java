@@ -1,19 +1,18 @@
 package com.steven.test_demo;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.JsResult;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.steven.test_demo.activity.CustomLoadingActivity;
+import com.steven.test_demo.activity.RemoteAMainActivity;
+import com.steven.test_demo.activity.RemoteBMainActivity;
+import com.steven.test_demo.activity.WebViewActivity;
 
 public class MainActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
@@ -39,10 +38,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addButton("remoteBctivity", new View.OnClickListener() {
+        addButton("remoteActivity", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RemoteBMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        addButton("customLoadingActivity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CustomLoadingActivity.class);
                 startActivity(intent);
             }
         });

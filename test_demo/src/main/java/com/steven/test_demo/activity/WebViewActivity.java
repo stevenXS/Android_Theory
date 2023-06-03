@@ -1,4 +1,4 @@
-package com.steven.test_demo;
+package com.steven.test_demo.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.steven.test_demo.R;
 
 public class WebViewActivity extends AppCompatActivity {
     private WebView webView;

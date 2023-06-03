@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Theory">
         <activity
-            android:name=".WebViewActivity"
+            android:name=".activity.CustomLoadingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.WebViewActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -23,11 +26,11 @@
             </intent-filter>
         </activity> <!-- 当前主进程的私有进程 -->
         <activity
-            android:name=".RemoteAMainActivity"
+            android:name=".activity.RemoteAMainActivity"
             android:exported="true"
             android:process=":remoteA" /> <!-- 新的全局进程 -->
         <activity
-            android:name=".RemoteBMainActivity"
+            android:name=".activity.RemoteBMainActivity"
             android:exported="true"
             android:process="com.xx.remoteB" />
     </application>
