@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/design_pattern" />
             <option value="$PROJECT_DIR$/jetpack_demo" />
             <option value="$PROJECT_DIR$/kotlin_demo" />
+            <option value="$PROJECT_DIR$/test_demo" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

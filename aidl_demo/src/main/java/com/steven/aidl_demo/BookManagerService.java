@@ -7,6 +7,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.steven.aidl_demo.Book;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;

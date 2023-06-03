@@ -85,6 +85,9 @@
         <activity
             android:name=".content_provider.MyContentProviderActivity"
             android:exported="true" />
+        <activity
+            android:name=".TestMainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

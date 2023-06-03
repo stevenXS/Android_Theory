@@ -7,7 +7,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,8 +16,6 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.List;
 
 public class BookClientActivity extends AppCompatActivity {
     private static final String TAG = "BookClientActivity";

@@ -91,5 +91,8 @@ class MainActivity : CommonActivity() {
         addView("work_manger", "", Button(this)){
             startActivity(Intent(this, WorkManagerMainActivity::class.java))
         }
+        addView("test", "", Button(this)){
+            startActivity(Intent(this, TestMainActivity::class.java))
+        }
     }
 }
