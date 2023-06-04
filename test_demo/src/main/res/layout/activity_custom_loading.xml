@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activity.CustomLoadingActivity">
 
+    <!--
+        app:的属性使用的自定义属性，声明见value/attrs.xml
+    -->
     <com.steven.test_demo.custom_view.CustomLoadingView
         android:id="@+id/custom_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#00BCD4"
+        android:alpha="12"
+        android:layout_centerInParent="true"
         app:color1="#FF00EEEE"
         app:color2="#FFFF4040"
         app:duration="350"

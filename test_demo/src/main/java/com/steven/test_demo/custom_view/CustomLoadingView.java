@@ -20,7 +20,7 @@ import com.steven.test_demo.R;
 
 
 public class CustomLoadingView extends View {
-    //默认值
+    //属性的默认值
     private final float RADIUS = dp2px(6);
     private final float GAP = dp2px(0.8f);
     private static final float RTL_SCALE = 0.7f;
@@ -32,7 +32,6 @@ public class CustomLoadingView extends View {
     private static final int PAUSE_DUARTION = 80;
     private static final float SCALE_START_FRACTION = 0.2f;
     private static final float SCALE_END_FRACTION = 0.8f;
-
 
     //属性
     private float radius1; //初始时左小球半径
@@ -83,13 +82,10 @@ public class CustomLoadingView extends View {
         pauseDuration = ta.getInt(R.styleable.DYLoadingView_pauseDuration, PAUSE_DUARTION);
         scaleStartFraction = ta.getFloat(R.styleable.DYLoadingView_scaleStartFraction, SCALE_START_FRACTION);
         scaleEndFraction = ta.getFloat(R.styleable.DYLoadingView_scaleEndFraction, SCALE_END_FRACTION);
-        ta.recycle();
-
+        ta.recycle();// 释放ta变量
         checkAttr();
         distance = gap + radius1 + radius2;
-
         initDraw();
-
         initAnim();
     }
 
@@ -134,23 +130,39 @@ public class CustomLoadingView extends View {
 
         stop();
 
-        anim = ValueAnimator.ofFloat(0.0f, 1.0f);
-        anim.setDuration(duration);
+        anim = ValueAnimator.ofFloat(0.0f, 1.0f); //以浮点型初始值平稳过渡到浮点结束值：从0.0变化到1.0；如果传入的是(0.0, 1.0, 0.0)则表示从0.0变化到1.0，再变化到0.0
+        anim.setDuration(duration); //设置动画的持续时间
         if (pauseDuration > 0) {
             anim.setStartDelay(pauseDuration);
             anim.setInterpolator(new AccelerateDecelerateInterpolator());
         } else {
-            anim.setRepeatCount(ValueAnimator.INFINITE);
-            anim.setRepeatMode(ValueAnimator.RESTART);
+            anim.setRepeatCount(ValueAnimator.INFINITE); //无线循环
+            anim.setRepeatMode(ValueAnimator.RESTART); //循环模式：{REVERSE，RESTART}——{倒叙，重新开始}
             anim.setInterpolator(new LinearInterpolator());
         }
+        /**
+         * AnimatorUpdateListener就是监听动画实时变化的状态，在onAnimationUpdate(ValueAnimator animation)函数中返回的就是动画的实例animator，
+         * 根据实例可以获取到不同的数据，比如：animation.getAnimatedValue()获取动画实时变化的值等。
+         */
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 fraction = animation.getAnimatedFraction();
+                /**
+                 * invalidate()是用来刷新View的，必须是在UI线程中进行工作。
+                 * 比如在修改某个view的显示时，调用invalidate()才能看到重新绘制的界面。
+                 * invalidate()的调用是把之前的旧的view从主UI线程队列中pop掉。
+                 */
                 invalidate();
             }
         });
+        /**
+         * AnimatorListener主要是监听动画的四个状态：start，end，cancel，repeat；
+         *  当动画开始时，会调用onAnimationStart(Animator animation)函数；
+         *  当动画结束时，调用onAnimationEnd(Animator animation)函数；
+         *  当动画退出时，调用onAnimationCancel(Animator animation)函数；
+         *  当动画重复时，调用onAnimationRepeat(Animator animation)函数。
+         */
         anim.addListener(new AnimatorListenerAdapter() {
 
             @Override
@@ -178,7 +190,16 @@ public class CustomLoadingView extends View {
 
     }
 
-
+    /**
+     * 重写测量，改变View大小。如果需要重新确定View位置，则需要重写onLayout
+     * @param widthMeasureSpec horizontal space requirements as imposed by the parent.
+     *                         The requirements are encoded with
+     *                         {@link android.view.View.MeasureSpec}.
+     * @param heightMeasureSpec vertical space requirements as imposed by the parent.
+     *                         The requirements are encoded with
+     *                         {@link android.view.View.MeasureSpec}.
+     *
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -201,6 +222,10 @@ public class CustomLoadingView extends View {
         setMeasuredDimension(wSize, hSize);
     }
 
+    /**
+     * 重新绘制当前View
+     * @param canvas the canvas on which the background will be drawn
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
