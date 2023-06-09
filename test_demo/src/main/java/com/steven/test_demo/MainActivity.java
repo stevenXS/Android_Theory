@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.steven.test_demo.activity.CountDownActivity;
 import com.steven.test_demo.activity.CustomLoadingActivity;
 import com.steven.test_demo.activity.RemoteAMainActivity;
 import com.steven.test_demo.activity.RemoteBMainActivity;
@@ -50,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CustomLoadingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        addButton("CountDownActivity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CountDownActivity.class);
                 startActivity(intent);
             }
         });
