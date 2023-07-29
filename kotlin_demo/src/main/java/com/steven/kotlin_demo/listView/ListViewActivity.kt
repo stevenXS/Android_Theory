@@ -17,6 +17,7 @@ class ListViewActivity : AppCompatActivity() {
         val fruitAdapter = FruitAdapter(this, R.layout.list_view_fruit, fruitList)
         listView.adapter = fruitAdapter
         listView.setOnItemClickListener { parent, view, position, id ->
+            // 对每个item设置监听器
             val fruit = fruitList[position]
             Toast.makeText(this, "name: ${fruit.name}", Toast.LENGTH_LONG).show()
         }
