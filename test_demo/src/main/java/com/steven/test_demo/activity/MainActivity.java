@@ -1,4 +1,4 @@
-package com.steven.test_demo;
+package com.steven.test_demo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,12 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.steven.test_demo.activity.CountDownActivity;
-import com.steven.test_demo.activity.CustomLoadingActivity;
-import com.steven.test_demo.activity.RemoteAMainActivity;
-import com.steven.test_demo.activity.RemoteBMainActivity;
-import com.steven.test_demo.activity.WebViewActivity;
+import com.steven.test_demo.R;
 import com.steven.test_demo.custom_view.CustomFloatActionButton;
 
 public class MainActivity extends AppCompatActivity {
