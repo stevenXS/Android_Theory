@@ -1,4 +1,4 @@
-package com.steven.test_demo.activity;
+package com.steven.test_demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.steven.test_demo.R;
+
+import com.steven.test_demo.activity.CountDownActivity;
+import com.steven.test_demo.activity.CustomLoadingActivity;
+import com.steven.test_demo.activity.RemoteAMainActivity;
+import com.steven.test_demo.activity.RemoteBMainActivity;
+import com.steven.test_demo.activity.WebViewActivity;
+import com.steven.test_demo.activity.SearchActivity;
 import com.steven.test_demo.custom_view.CustomFloatActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
         });
         addView("FloatButton", new CustomFloatActionButton.FloatButtonListener(this, "测试"),
                 new CustomFloatActionButton(this));
+        addButton("SearchActivity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void addButton(String btnName, View.OnClickListener listener){

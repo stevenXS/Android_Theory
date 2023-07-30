@@ -14,13 +14,16 @@
             android:name=".activity.CountDownActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CustomLoadingActivity"
             android:exported="false" />
         <activity
             android:name=".activity.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

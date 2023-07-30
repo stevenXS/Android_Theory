@@ -8,13 +8,9 @@ import androidx.annotation.Nullable;
 
 public class RecordSQLiteHelper extends SQLiteOpenHelper {
     private static final String name = "search.db";
-    private static final int version = 1;
+    private static final int version = 2;
 
-    private static final String createTable = "create table if not exists records" +
-            "(" +
-            "id integer primary key autoincrement, " +
-            "name varchar(200)" +
-            ")";
+    private static final String createTable = "create table search(id integer primary key autoincrement,name varchar(200))";
 
     public RecordSQLiteHelper(@Nullable Context context) {
         super(context, name, null, version);

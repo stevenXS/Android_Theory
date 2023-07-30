@@ -2,6 +2,8 @@ package com.steven.test_demo.customSearchView.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +30,7 @@ import com.steven.test_demo.customSearchView.callback.IReturnCallback;
 import com.steven.test_demo.customSearchView.callback.ISearchCallback;
 import com.steven.test_demo.customSearchView.utils.RecordSQLiteHelper;
 
-public class SearchView extends LinearLayout {
+public class CustomSearchView extends LinearLayout {
     private Context context;
 
     // 数据库
@@ -56,20 +60,20 @@ public class SearchView extends LinearLayout {
     private LinearLayout searchBlock; // 搜索框布局
     private ImageView searchBack; // 返回按键
 
-    public SearchView(Context context) {
+    public CustomSearchView(Context context) {
         super(context);
         this.context = context;
         init();
     }
 
-    public SearchView(Context context, @Nullable AttributeSet attrs) {
+    public CustomSearchView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         initAttrs(context,attrs);
         init();
     }
 
-    public SearchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomSearchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         initAttrs(context, attrs);
@@ -104,12 +108,12 @@ public class SearchView extends LinearLayout {
     private void init() {
         initView();
         helper = new RecordSQLiteHelper(context);
-        // queryData(); // 首次进入查询所有历史记录
+        queryData(""); // 首次进入查询所有历史记录
         tvClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                deleteData();
-//                queryData();
+                deleteData();
+                queryData("");
             }
         });
         // 监听输入键盘的按键事件
@@ -124,11 +128,11 @@ public class SearchView extends LinearLayout {
                         searchCallback.onSearch(inputMsg); //搜索事件回调
                     }
                     toast(context, "搜索：" + inputMsg);
-                    //boolean exists =  checkData(etSearch.getText().toString().trim());
-//                    if (!exists) {
-//                        insertData(inputMsg);
-//                        queryData("");
-//                    }
+                    boolean exists =  checkData(etSearch.getText().toString().trim());
+                    if (!exists) {
+                        insertData(inputMsg);
+                        queryData("");
+                    }
                 }
                 return false;
             }
@@ -149,7 +153,7 @@ public class SearchView extends LinearLayout {
             public void afterTextChanged(Editable s) {
                 // 输入文本后回调此方法
                 String msg = etSearch.getText().toString();
-//                query(msg);
+                queryData(msg);
             }
         });
         // 搜索记录列表
@@ -201,5 +205,66 @@ public class SearchView extends LinearLayout {
 
     private void toast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    }
+
+    // 模糊查询数据并显示到ListView中
+    private void queryData(String data) {
+        try {
+            SQLiteDatabase rd = helper.getReadableDatabase();
+            // 执行模糊查询
+            Cursor cursor = rd.rawQuery("select id as _id,name from search where name like '%" + data + "%' order by id desc", null);
+            // 将查询结果cursor载入adapter
+            adapter = new SimpleCursorAdapter(context, android.R.layout.simple_list_item_1, cursor, new String[]{"name"},
+                    new int[]{android.R.id.text1}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            // 设置adapter
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+            // 输入为空且数据库有查询记录时，显示删除搜索记录
+            if ("".equals(data) && cursor.getCount() != 0) {
+                tvClear.setVisibility(VISIBLE);
+            } else {
+                tvClear.setVisibility(INVISIBLE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+    }
+
+    private void deleteData() {
+        try {
+            db = helper.getWritableDatabase();
+            db.execSQL("delete from search");
+            tvClear.setVisibility(INVISIBLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+    }
+
+    private boolean checkData(String data) {
+        Cursor cursor = helper.getReadableDatabase().rawQuery("select id as _id,name from search where name=?", new String[]{data});
+        return cursor.moveToNext();
+    }
+
+    private void insertData(String data) {
+        try {
+            db = helper.getWritableDatabase();
+            db.execSQL("insert into search(name) values('" + data +"')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+    }
+
+    public void setOnSearchClickListener(ISearchCallback callback) {
+        this.searchCallback = callback;
+    }
+
+    public void setOnReturnClickListener(IReturnCallback callback) {
+        this.returnCallback = callback;
     }
 }
