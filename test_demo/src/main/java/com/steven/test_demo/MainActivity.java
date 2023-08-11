@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.steven.camera.CameraActivity;
 import com.steven.test_demo.activity.CountDownActivity;
 import com.steven.test_demo.activity.CustomLoadingActivity;
 import com.steven.test_demo.activity.RemoteAMainActivity;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         addButton("webview_activity", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        addButton("Camera2Activity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
         });
