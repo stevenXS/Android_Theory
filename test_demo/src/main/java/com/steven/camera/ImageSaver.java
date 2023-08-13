@@ -1,7 +1,7 @@
 package com.steven.camera;
 
 import android.media.Image;
-
+import android.widget.ImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,15 +11,13 @@ public class ImageSaver implements Runnable{
     /**
      * The JPEG image
      */
-    private final Image mImage;
+    private Image mImage;
     /**
      * The file we save the image into.
      */
-    private final File mFile;
+    private File mFile;
 
-    ImageSaver(Image image, File file) {
-        mImage = image;
-        mFile = file;
+    private ImageSaver() {
     }
 
     @Override
@@ -42,6 +40,30 @@ public class ImageSaver implements Runnable{
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public static class Builder {
+        private Image mImage;
+        private File mFile;
+        public Builder() {
+        }
+
+        public Builder setImage(Image image) {
+            this.mImage = image;
+            return this;
+        }
+
+        public Builder setFile(File file) {
+            this.mFile = file;
+            return this;
+        }
+
+        public ImageSaver build() {
+            ImageSaver imageSaver = new ImageSaver();
+            imageSaver.mImage = mImage;
+            imageSaver.mFile = mFile;
+            return imageSaver;
         }
     }
 }

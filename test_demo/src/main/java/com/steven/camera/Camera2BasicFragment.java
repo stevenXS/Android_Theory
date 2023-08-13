@@ -6,11 +6,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -31,18 +31,15 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
-import android.util.Range;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.Surface;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -68,6 +65,8 @@ public class Camera2BasicFragment extends Fragment implements
     private static final String TAG = "CameraUtils ";
     public static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
+
+    private ImageView showImgView;
 
     /**
      *  相机开关控制锁
@@ -100,11 +99,6 @@ public class Camera2BasicFragment extends Fragment implements
     private CameraDevice mCameraDevice;
 
     /**
-     * 相机管理类
-     */
-    private CameraManager mCameraManager;
-
-    /**
      * 相机配置类
      */
     private CaptureRequest mPreviewRequest;
@@ -114,10 +108,6 @@ public class Camera2BasicFragment extends Fragment implements
      */
     private CaptureRequest.Builder mPreviewRequestBuilder;
 
-    /**
-     * 相机参数类
-     */
-    private CameraCharacteristics mCameraCharacteristics;
 
     /**
      * The {@link android.util.Size} of camera preview.
@@ -158,7 +148,6 @@ public class Camera2BasicFragment extends Fragment implements
      * 图片输出文件类
      */
     private File mFile;
-
 
     /**
      * Camera state: 相机预览
@@ -258,8 +247,25 @@ public class Camera2BasicFragment extends Fragment implements
         @Override
         public void onImageAvailable(ImageReader reader) {
             if (sdkVersionThanAndroidL()) {
-                // 图像处理逻辑
-                mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+                //
+                Image image = reader.acquireNextImage();
+                ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+                byte[] bytes = new byte[buffer.remaining()]; // 开辟字节数组，buffer.remaining()返回该缓冲区的元素总数
+                buffer.get(bytes);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                ViewGroup.LayoutParams layoutParams = showImgView.getLayoutParams();
+                layoutParams.height = mTextureView.getHeight();
+                layoutParams.width = mTextureView.getWidth();
+                showImgView.setLayoutParams(layoutParams);
+                mTextureView.setVisibility(View.INVISIBLE);
+                showImgView.setVisibility(View.VISIBLE);
+                showImgView.setImageBitmap(bitmap);
+                // 子线程保存图像
+//                mBackgroundHandler.post(new ImageSaver.Builder()
+//                        .setImage(image)
+//                        .setFile(mFile)
+//                        .build());
+                image.close();
             }
         }
     };
@@ -340,8 +346,38 @@ public class Camera2BasicFragment extends Fragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         view.findViewById(R.id.picture).setOnClickListener(this);
         view.findViewById(R.id.info).setOnClickListener(this);
+        view.findViewById(R.id.switch_camera).setOnClickListener(this);
+        showImgView = (ImageView) view.findViewById(R.id.show_img);
+        showImgView.setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture); // 视频播放视图
         mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.picture: {
+                takePicture();
+                break;
+            }
+            case R.id.info: {
+                Activity activity = getActivity();
+                if (null != activity) {
+                    new AlertDialog.Builder(activity)
+                            .setMessage("test message")
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show();
+                }
+                break;
+            }
+            case R.id.switch_camera:
+                // TODO: 根据相机列表建立数组，每次切换时获取数组的值，根据不同镜头去重新创建预览布局和会话
+                break;
+            case R.id.show_img:
+                showImgView.setVisibility(View.INVISIBLE);
+                mTextureView.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override
@@ -435,26 +471,6 @@ public class Camera2BasicFragment extends Fragment implements
         return null;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.picture: {
-                takePicture();
-                break;
-            }
-            case R.id.info: {
-                Activity activity = getActivity();
-                if (null != activity) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage("test message")
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
-                }
-                break;
-            }
-        }
-    }
-
     /**
      * Compares two {@code Size}s based on their areas.
      */
@@ -530,7 +546,7 @@ public class Camera2BasicFragment extends Fragment implements
 
                     Size largest = Collections.max(Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)), new CompareSizesByArea());
                     mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, 2);
-                    mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
+                    mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, new Handler(Looper.getMainLooper()));
 
                     // 是否需要交换尺寸以获得相对于传感器的预览尺寸
                     int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
@@ -653,8 +669,7 @@ public class Camera2BasicFragment extends Fragment implements
             Surface surface = new Surface(texture);
 
             // We set up a CaptureRequest.Builder with the output Surface.
-            mPreviewRequestBuilder
-                    = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+            mPreviewRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
             mPreviewRequestBuilder.addTarget(surface);
 
             // Here, we create a CameraCaptureSession for camera preview.
@@ -744,8 +759,7 @@ public class Camera2BasicFragment extends Fragment implements
     private void lockFocus() {
         try {
             // This is how to tell the camera to lock focus.
-            mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
-                    CameraMetadata.CONTROL_AF_TRIGGER_START);
+            mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_START);
             // Tell #mCaptureCallback to wait for the lock.
             mState = STATE_WAITING_LOCK;
             mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback,
@@ -780,22 +794,16 @@ public class Camera2BasicFragment extends Fragment implements
                 return;
             }
             // This is the CaptureRequest.Builder that we use to take a picture.
-            final CaptureRequest.Builder captureBuilder =
-                    mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+            final CaptureRequest.Builder captureBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
             captureBuilder.addTarget(mImageReader.getSurface());
-
             // Use the same AE and AF modes as the preview.
-            captureBuilder.set(CaptureRequest.CONTROL_AF_MODE,
-                    CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+            captureBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
             setAutoFlash(captureBuilder);
-
             // Orientation
             int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, getOrientation(rotation));
 
-            CameraCaptureSession.CaptureCallback CaptureCallback
-                    = new CameraCaptureSession.CaptureCallback() {
-
+            CameraCaptureSession.CaptureCallback CaptureCallback = new CameraCaptureSession.CaptureCallback() {
                 @Override
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
