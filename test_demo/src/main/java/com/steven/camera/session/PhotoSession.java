@@ -13,6 +13,7 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.os.Handler;
+import android.view.TextureView;
 
 import androidx.annotation.NonNull;
 
@@ -92,10 +93,10 @@ public class PhotoSession extends Session {
     }
 
     @Override
-    public void postRequest(int type, SurfaceTexture surfaceTexture) {
+    public void postRequest(int type, TextureView textureView) {
         switch (type) {
             case RQ_START_PREVIEW:
-                createCameraPreviewSession(surfaceTexture, null, mCaptureCallback, null);
+                createCameraPreviewSession(textureView, null, mCaptureCallback, null);
                 break;
             case RQ_TAKE_PHOTO:
                 takePicture();

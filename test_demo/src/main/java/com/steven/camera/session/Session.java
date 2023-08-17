@@ -15,6 +15,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Size;
 import android.view.Surface;
+import android.view.TextureView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,7 +62,7 @@ public abstract class Session {
 
     protected Size mPreviewSize;
 
-    public abstract void postRequest(int type, SurfaceTexture surfaceTexture);
+    public abstract void postRequest(int type, TextureView surfaceTexture);
 
     protected Session(Context context, CameraDeviceManager manager, CameraCharacteristics characteristics) {
         mContext = context;
@@ -71,10 +72,10 @@ public abstract class Session {
 
     /**
      * 调用时机：相机打开后的{@link CameraDevice.StateCallback#onOpened(CameraDevice)}回调中开启预览
-     * @param surfaceTexture：支持视频的Surface
+     * @param textureView：支持视频的View
      * @param handler: null表示在当前线程处理，反之在handler对应线程处理
      */
-    protected void createCameraPreviewSession(@NonNull SurfaceTexture surfaceTexture, @Nullable CaptureRequest.Builder builder,
+    protected void createCameraPreviewSession(@NonNull TextureView textureView, @Nullable CaptureRequest.Builder builder,
                                               final CameraCaptureSession.CaptureCallback captureCallback, @Nullable final Handler handler) {
         final CameraDevice cameraDevice = mCameraDeviceManager.getCameraDevice();
         if (cameraDevice == null) {
@@ -105,9 +106,10 @@ public abstract class Session {
             }
         };
         // 创建预览会话
+        SurfaceTexture surfaceTexture = textureView.getSurfaceTexture();
         final Surface surface = new Surface(surfaceTexture);
         List<Surface> outputSize = setUpOutputSize(mContext, surfaceTexture);
-
+        mCameraSettings.configTransform(textureView.getWidth(), textureView.getHeight(), mPreviewSize, textureView);
         surfaceTexture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
         try {
             if (builder != null) {
@@ -139,6 +141,10 @@ public abstract class Session {
             surfaceTexture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
         }
         return Arrays.asList(new Surface(surfaceTexture), mImageReader.getSurface());
+    }
+
+    public Size getPreviewSize() {
+        return mPreviewSize;
     }
 
     public CaptureRequest.Builder createBuilder(int type, Surface surface) {

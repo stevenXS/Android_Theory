@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -38,7 +39,7 @@ public class Camera2FragmentRefactor extends Fragment implements View.OnClickLis
     private final CameraDeviceManager.CameraEvent cameraEvent = new CameraDeviceManager.CameraEvent() {
         @Override
         public void onCameraOpened(CameraDevice device) {
-            session.postRequest(Session.RQ_START_PREVIEW, mTextureView.getSurfaceTexture());
+            session.postRequest(Session.RQ_START_PREVIEW, mTextureView);
         }
     };
 
@@ -64,7 +65,8 @@ public class Camera2FragmentRefactor extends Fragment implements View.OnClickLis
 
         @Override
         public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {
-
+            Log.d("camera2", "onSurfaceTextureSizeChanged");
+            cameraSettings.configTransform(mTextureView.getWidth(), mTextureView.getHeight(), session.getPreviewSize(), mTextureView);
         }
 
         @Override
@@ -124,7 +126,7 @@ public class Camera2FragmentRefactor extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.picture: {
-                session.postRequest(Session.RQ_TAKE_PHOTO, mTextureView.getSurfaceTexture());
+                session.postRequest(Session.RQ_TAKE_PHOTO, mTextureView);
                 break;
             }
             case R.id.info: {
