@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.steven.camera.CameraActivity;
+import com.steven.pick_photo_album.PickPhotoActivity;
 import com.steven.test_demo.activity.CountDownActivity;
 import com.steven.test_demo.activity.CustomLoadingActivity;
 import com.steven.test_demo.activity.RemoteAMainActivity;
@@ -80,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+        addButton("PickPhotoActivity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PickPhotoActivity.class);
                 startActivity(intent);
             }
         });

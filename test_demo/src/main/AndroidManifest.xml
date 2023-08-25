@@ -5,7 +5,11 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!--10+强制获取文件读写权限-->
     <application
+        android:requestLegacyExternalStorage="true"
         android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_foreground"
@@ -44,6 +48,9 @@
             android:process="com.xx.remoteB" />
         <activity
             android:name="com.steven.camera.CameraActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.steven.pick_photo_album.PickPhotoActivity"
             android:exported="true" />
     </application>
 
