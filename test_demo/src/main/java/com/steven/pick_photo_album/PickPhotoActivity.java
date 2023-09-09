@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import com.steven.camera.ConfirmationDialog;
 import com.steven.test_demo.R;
 
 /**
