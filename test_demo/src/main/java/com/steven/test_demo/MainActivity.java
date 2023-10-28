@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.steven.camera.CameraActivity;
+import com.steven.content_provider.MyProviderActivity;
+import com.steven.event_bus.FirstActivity;
 import com.steven.extertal_storage.ExternalStorageActivity;
 import com.steven.pick_photo_album.PickPhotoActivity;
 import com.steven.test_demo.activity.CountDownActivity;
@@ -96,6 +98,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ExternalStorageActivity.class);
+                startActivity(intent);
+            }
+        });
+        addButton("MyProviderActivity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyProviderActivity.class);
+                startActivity(intent);
+            }
+        });
+        addButton("EventBus", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
                 startActivity(intent);
             }
         });

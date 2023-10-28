@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" tools:ignore="ProtectedPermissions" />
 
+    <!--Android 11+ 访问ContentProvider需要声明包名-->
+    <queries>
+        <package android:name="com.steven.test_demo"/>
+    </queries>
 
     <!--10+强制获取文件读写权限-->
     <application
@@ -60,6 +64,19 @@
         <activity
             android:name="com.steven.extertal_storage.ExternalStorageActivity"
             android:exported="true" />
+        <activity
+            android:name="com.steven.content_provider.MyProviderActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.steven.event_bus.FirstActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.steven.event_bus.SecondActivity"
+            android:exported="true" />
+
+        <provider
+            android:authorities="com.steven.myprovider"
+            android:name="com.steven.content_provider.MyProvider"/>
     </application>
 
 </manifest>

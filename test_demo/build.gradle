@@ -37,4 +37,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 //    implementation project(':custom_annotation') // 自定义注解module
+    implementation("org.greenrobot:eventbus:3.3.1") // 事件总线SDK
 }
