@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.steven.annotaion.AnnotationActivity;
 import com.steven.camera.CameraActivity;
 import com.steven.content_provider.MyProviderActivity;
 import com.steven.event_bus.FirstActivity;
@@ -112,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FirstActivity.class);
+                startActivity(intent);
+            }
+        });
+        addButton("Annotation", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AnnotationActivity.class);
                 startActivity(intent);
             }
         });

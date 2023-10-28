@@ -1,0 +1,19 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // auto-service, Google开源的用来方便生成符合ServiceLoader规范的开源库
+    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    // javapoet, square推出的开源java代码生成框架,提供Java Api生成.java源文件。
+    implementation 'com.squareup:javapoet:1.11.1'
+    // 这个模块存放着我们需要处理的注解
+    implementation project(path: ":annotation")
+}

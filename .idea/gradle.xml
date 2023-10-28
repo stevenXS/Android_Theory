@@ -12,8 +12,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/aidl_demo" />
+            <option value="$PROJECT_DIR$/annotation" />
             <option value="$PROJECT_DIR$/custom_annotation" />
             <option value="$PROJECT_DIR$/kotlin_demo" />
+            <option value="$PROJECT_DIR$/process" />
             <option value="$PROJECT_DIR$/test_demo" />
           </set>
         </option>
