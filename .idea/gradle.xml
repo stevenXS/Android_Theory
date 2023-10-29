@@ -5,8 +5,9 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../gradle-6.7.1-bin/gradle-6.7.1" />
         <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
@@ -14,6 +15,7 @@
             <option value="$PROJECT_DIR$/aidl_demo" />
             <option value="$PROJECT_DIR$/annotation" />
             <option value="$PROJECT_DIR$/custom_annotation" />
+            <option value="$PROJECT_DIR$/design_pattern" />
             <option value="$PROJECT_DIR$/kotlin_demo" />
             <option value="$PROJECT_DIR$/process" />
             <option value="$PROJECT_DIR$/test_demo" />
