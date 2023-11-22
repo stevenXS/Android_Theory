@@ -44,6 +44,12 @@ public class BookClientActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /**
+     * 1. 创建ServiceConnection，然后Service回调onServiceConnected传递服务端的IBookManager实现类的引用；
+     * 2. 用该引用注入客户端监听器
+     * 3. 服务端后台轮训发现有监听者即刻回调对应方法；
+     * 4. 客户端监听者在回调中消费服务端给的数据
+     */
     private ServiceConnection connection = new ServiceConnection() {
         // 当Service调用onBind()后会回调onServiceConnected()方法
         @Override
