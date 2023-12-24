@@ -76,6 +76,9 @@
         <activity
             android:name="com.steven.annotaion.AnnotationActivity"
             android:exported="true" />
+        <activity
+            android:name="com.steven.performance.SplashActivity"
+            android:exported="true" />
 
         <provider
             android:authorities="com.steven.myprovider"

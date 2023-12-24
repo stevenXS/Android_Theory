@@ -22,9 +22,12 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
       <module name="android.Android_Theory.kotlin_demo" target="1.8" />
+      <module name="Android_Theory.adb_shell_demo" target="1.8" />
       <module name="Android_Theory.aidl_demo" target="1.8" />
+      <module name="Android_Theory.android-framework" target="1.8" />
       <module name="Android_Theory.custom_annotation" target="1.8" />
       <module name="Android_Theory.design_pattern" target="1.8" />
+      <module name="Android_Theory.looper-free" target="1.8" />
       <module name="Android_Theory.test_demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>

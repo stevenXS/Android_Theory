@@ -83,7 +83,7 @@ public class BookManagerService extends Service {
                 Book new_book = new Book(i, "new book");
                 try {
                     // 延迟处理，让客户端添加Listener
-                    Thread.sleep(2000);
+                    Thread.sleep(10000);
                     notifyAllListeners(new_book);
                 } catch (RemoteException e) {
                     e.printStackTrace();

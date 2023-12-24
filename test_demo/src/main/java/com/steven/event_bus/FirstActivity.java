@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.steven.Utils.ThreadUtils;
 import com.steven.test_demo.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,6 +26,7 @@ public class FirstActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+        ThreadUtils.testFuture();
         tv_message = findViewById(R.id.text);
         bt_message = findViewById(R.id.btn);
         tv_message.setText("FirstActivity");

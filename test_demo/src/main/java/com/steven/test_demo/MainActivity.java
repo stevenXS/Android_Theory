@@ -17,6 +17,7 @@ import com.steven.camera.CameraActivity;
 import com.steven.content_provider.MyProviderActivity;
 import com.steven.event_bus.FirstActivity;
 import com.steven.extertal_storage.ExternalStorageActivity;
+import com.steven.performance.SplashActivity;
 import com.steven.pick_photo_album.PickPhotoActivity;
 import com.steven.test_demo.activity.CountDownActivity;
 import com.steven.test_demo.activity.CustomLoadingActivity;
@@ -120,6 +121,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AnnotationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        addButton("SplashActivity", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SplashActivity.class);
                 startActivity(intent);
             }
         });
