@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.example.design_pattern.composite.College;
+import com.example.design_pattern.composite.Component;
+import com.example.design_pattern.composite.Department;
+import com.example.design_pattern.composite.University;
 import com.example.design_pattern.mvp.presenter.impl.MVPActivity;
 import com.example.design_pattern.mvp.view.activity.BaseActivity;
 
@@ -22,6 +26,17 @@ public class MainActivity extends BaseActivity {
         addButton("MVP", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Component university = new University("清华大学");
+                Component college1 = new College("电子信息学院");
+                Component college2 = new College("计算机学院");
+                college1.add(new Department("计算机科学", "计算机科学"));
+                college1.add(new Department("软件工程", "软件工程"));
+                college2.add(new Department("通信专业", "通信专业"));
+                college2.add(new Department("电路", "电路"));
+
+                university.add(college1);
+                university.add(college2);
+                university.print();
                 // 调用JS对应的函数
                 Intent intent = new Intent(MainActivity.this, MVPActivity.class);
                 startActivity(intent);

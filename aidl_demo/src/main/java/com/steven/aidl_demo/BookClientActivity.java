@@ -71,34 +71,46 @@ public class BookClientActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intent = new Intent(this, BookManagerService.class);
-        intent.setAction("steven");
-        ExecutorService service = Executors.newFixedThreadPool(2);
-        service.execute(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(3000);
-                            Log.d(TAG, "main thread done");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                if(bindService(intent, connection, Context.BIND_AUTO_CREATE)) {
-                    try {
-                        start = System.currentTimeMillis();
-                        latch.await();
-                        Log.d(TAG, Thread.currentThread().getName() + ", priority: " +Thread.currentThread().getPriority() + " callback success");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    Thread.sleep(3000);
+                    Log.d(TAG, "main thread done");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
+        Intent intent = new Intent(this, BookManagerService.class);
+        intent.setAction("steven");
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+//        ExecutorService service = Executors.newFixedThreadPool(2);
+//        service.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            Thread.sleep(3000);
+//                            Log.d(TAG, "main thread done");
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
+//                if(bindService(intent, connection, Context.BIND_AUTO_CREATE)) {
+//                    try {
+//                        start = System.currentTimeMillis();
+//                        latch.await();
+//                        Log.d(TAG, Thread.currentThread().getName() + ", priority: " +Thread.currentThread().getPriority() + " callback success");
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override

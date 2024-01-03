@@ -1,6 +1,7 @@
 package com.steven.aidl_demo.optUtil;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,12 +18,14 @@ public class MainThreadOptUtil {
     private Class<?> class_MessageQueue;
     private Class<?> class_Message;
     private Class<?> class_ActivityThread;
+    private Class<?> class_ActivityThread_BindServiceData;
     private Field filed_mMessages;
     private Field field_next;
     private Handler mh;
     private MessageQueue mhHandlerMessageQueue;
     private Field field_nextMessage;
     private static Method metaGetDeclaredField;
+    private static Intent bindServiceData;
 
     private static Method metaGetDeclaredMethod;
     private static Method metaClassForNameMethod;
@@ -46,6 +49,7 @@ public class MainThreadOptUtil {
         }
     }
 
+    @SuppressLint("PrivateApi")
     public MainThreadOptUtil() {
         try {
             class_Handler = Class.forName("android.os.Handler");
@@ -59,14 +63,16 @@ public class MainThreadOptUtil {
             field_next = class_Message.getDeclaredField("next");
             field_next.setAccessible(true);
             class_ActivityThread = Class.forName("android.app.ActivityThread");
+            class_ActivityThread_BindServiceData = Class.forName("android.app.ActivityThread$BindServiceData");
 
             mh = reflectGetmH();
             mhHandlerMessageQueue = getMessageQueue(mh);
+            bindServiceData = getBindServiceData();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, "error ");
         }
-        Log.d(TAG, "init " + mh + "," + class_ActivityThread +", " + mhHandlerMessageQueue);
+        Log.d(TAG, "init " + mh + "," + class_ActivityThread +", bindServiceData " + bindServiceData);
     }
 
     private Handler reflectGetmH() throws Exception {
@@ -74,6 +80,17 @@ public class MainThreadOptUtil {
         Field mhField = class_ActivityThread.getDeclaredField("mH");
         mhField.setAccessible(true);
         return (Handler) mhField.get(currentActivityThread);
+    }
+
+    private Intent getBindServiceData() {
+        try {
+            Field intent = getHiddenField(this.class_ActivityThread_BindServiceData, "intent");
+            intent.setAccessible(true);
+            return (Intent) intent.get(this.class_ActivityThread_BindServiceData.newInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @SuppressLint("SoonBlockedPrivateApi")
