@@ -15,6 +15,7 @@ import com.example.design_pattern.composite.College;
 import com.example.design_pattern.composite.Component;
 import com.example.design_pattern.composite.Department;
 import com.example.design_pattern.composite.University;
+import com.example.design_pattern.decorator.DecoratorClient;
 import com.example.design_pattern.facade_pattern.FacedePatternManager;
 import com.example.design_pattern.mvp.presenter.impl.MVPActivity;
 import com.example.design_pattern.mvp.view.activity.BaseActivity;
@@ -46,6 +47,9 @@ public class MainActivity extends BaseActivity {
                 // 调用JS对应的函数
                 Intent intent = new Intent(MainActivity.this, MVPActivity.class);
                 startActivity(intent);
+
+                // 装饰器模式
+                DecoratorClient.execute();
             }
         });
     }
