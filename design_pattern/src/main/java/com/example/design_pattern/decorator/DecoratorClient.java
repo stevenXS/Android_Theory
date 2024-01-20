@@ -2,6 +2,8 @@ package com.example.design_pattern.decorator;
 
 import android.util.Log;
 
+import com.example.design_pattern.decorator.decorator.ChocolateDec;
+
 public class DecoratorClient {
     public static void execute() {
         Component america = new America();

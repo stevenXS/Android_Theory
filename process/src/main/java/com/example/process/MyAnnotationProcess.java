@@ -32,10 +32,11 @@ import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
 /**
- * 自定义注解解析器，实现绑定ViewID
+ * 自定义注解解析器，实现将当前View自动绑定到activity：即activity.findViewById(int id)
  */
 @AutoService(Processor.class) // 生成Java文件的注解
 public class MyAnnotationProcess extends AbstractProcessor {
+    public static final String TAG = "MyAnnotationProcess# ";
     /**
      * 文件相关的辅助类
      */
@@ -54,28 +55,31 @@ public class MyAnnotationProcess extends AbstractProcessor {
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        System.out.println("BindViewProcess init");
         mMessager = processingEnv.getMessager();
         mFiler = processingEnv.getFiler();
+        loggerInfo(TAG + "BindViewProcess init");
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        // 处理注解
-        for (Element element : roundEnv.getElementsAnnotatedWith(MyBindView.class)) {
-            if (element instanceof VariableElement) {
-                VariableElement variableElement = (VariableElement) element;
-                Set<Modifier> modifiers = variableElement.getModifiers(); // 权限修饰符
-                if (modifiers.contains(Modifier.PRIVATE) || modifiers.contains(Modifier.PROTECTED)) {
-                    // 类型检查 ，如果是私有的，或者PROTECTED，则退出
-                    mMessager.printMessage(Diagnostic.Kind.ERROR, "成员变量的类型不能是PRIVATE或者PROTECTED");
-                    return false;
+        if (annotations != null && !annotations.isEmpty()) {
+            // 查看当前Java文件是否有自定义的注解类
+            for (Element element : roundEnv.getElementsAnnotatedWith(MyBindView.class)) {
+                if (element instanceof VariableElement) {
+                    VariableElement variableElement = (VariableElement) element;
+                    Set<Modifier> modifiers = variableElement.getModifiers(); // 权限修饰符
+                    loggerInfo(TAG + modifiers.size() + " 个属性添加了MyBindView注解");
+                    if (modifiers.contains(Modifier.PRIVATE) || modifiers.contains(Modifier.PROTECTED)) {
+                        // 类型检查 ，如果是私有的，或者PROTECTED，则警告
+                        mMessager.printMessage(Diagnostic.Kind.WARNING, "成员变量的类型不能是PRIVATE或者PROTECTED");
+                    }
+                    saveViewInfo(variableElement);
                 }
-                saveViewInfo(variableElement);
             }
+            // 保存所有注解数据后，对每个Activity里的View创建一个新的Java文件
+            writeToFile();
+            return true;
         }
-        // 保存所有注解数据后，对每个Activity里的View创建一个新的Java文件
-        writeToFile();
         return false;
     }
 
@@ -89,8 +93,9 @@ public class MyAnnotationProcess extends AbstractProcessor {
 
     // 保存每个activity对应的view集合
     private void saveViewInfo(VariableElement variableElement) {
-        System.out.println("variableElement: " + variableElement.toString());
-        //获得外部元素对象: xxx.MainActivity
+
+
+        //获得当前元素variableElement的类型
         TypeElement typeElement = (TypeElement) variableElement.getEnclosingElement();
         List<ViewInfo> viewInfos;
         if (viewMap.get(typeElement) != null) {
@@ -100,59 +105,79 @@ public class MyAnnotationProcess extends AbstractProcessor {
             // 没有就新创建一个
             viewInfos = new ArrayList<>();
         }
+        // 这里会打印添加了对应注解的变量名
+        loggerInfo(TAG + "[saveViewInfo] variableElement: " + variableElement  + ", typeElement " + typeElement);
+        // 解析View注解上的信息并保存到集合
         MyBindView annotation = variableElement.getAnnotation(MyBindView.class);
-        int viewId = annotation.value();
-        String viewName = variableElement.getSimpleName().toString();
+        int viewId = annotation.value();  // 这里获取自定义注解的方法返回值
+        String viewName = variableElement.getSimpleName().toString(); // 获取当前View元素的名称
         viewInfos.add(new ViewInfo(viewId, viewName));
         viewMap.put(typeElement, viewInfos);
-        System.out.println("saveView: (viewId, viewName)" + viewId + " " + viewName );
+        loggerInfo(TAG + "saveView: (viewId, viewName)" + viewId + " " + viewName );
     }
 
     /**
-     * 生成文件
+     * 生成文件：
+     *  activity.textview = activity.findViewById(2131231103); 将这个过程自动化
+     *
+     * 编译完成后会在Android APP build/generated/ap_generated_sources/debug生成以下代码
+     *  class AnnotationActivity_myBindView {
+     *   public AnnotationActivity_myBindView(AnnotationActivity activity) {
+     *     activity.textView = activity.findViewById(2131231174);
+     *     activity.btn = activity.findViewById(2131230820);
+     *   }
+     * }
      */
     private void writeToFile() {
         Set<TypeElement> typeElements = viewMap.keySet();
         // 方法参数
         String paramName = "activity";
-        System.out.println("viewlinkmap: "+ viewMap.size());
+        loggerInfo(TAG + "viewlinkmap: "+ viewMap.size());
         for (TypeElement typeElement : typeElements) {
-            ClassName className = ClassName.get(typeElement);//获取参数类型
+            ClassName className = ClassName.get(typeElement);//获取该元素对应的类的类型
             PackageElement packageElement = (PackageElement) typeElement.getEnclosingElement();//获得外部对象
-            String packageName = packageElement.getQualifiedName().toString();//获得外部类的包名 例：com.apt.viewlinkiddemo
+            String packageName = packageElement.getQualifiedName().toString();//获得外部类的包名
             List<ViewInfo> viewInfos = viewMap.get(typeElement);
-            //代码块对象   就是这玩意：activity.textview = activity.findViewById(2131231103);
-            //                      activity.bt = activity.findViewById(2131230807);
+            loggerInfo(TAG + "typeElement " + typeElement+ ", className: " + className + ", packageName " + packageName + "\n");
+            loggerInfo(TAG + "------------start generate code------------");
+            // 定义方法体
             CodeBlock.Builder builder = CodeBlock.builder();
+            CodeBlock.Builder commonBuilder = CodeBlock.builder();
             for (ViewInfo viewInfo : viewInfos) {
-                //***********************生成代码**************************
+                // 等价于：activity.viewName = activity.findViewById(int viewId)
                 builder.add(paramName + "." + viewInfo.getViewName() + " = " + paramName + ".findViewById(" + viewInfo.getViewId() + ");\n");
             }
 
-            // 成员变量 我们这里不需要
+            // 成员变量 这里不需要
 //            FieldSpec fieldSpec = FieldSpec.builder(String.class, "name", Modifier.PRIVATE).build();
 
-            // 添加构造方法
+            // 添加构造方法，这里表示生成的是构造方法
+            /**
+             * public ClassName_ParamName()
+             */
+            builder.add("printMsg(\"1111111111111\");\n");
             MethodSpec methodSpec = MethodSpec.constructorBuilder()//生成的方法对象
                     .addModifiers(Modifier.PUBLIC)//方法的修饰符
                     .addParameter(className, paramName)//方法中的参数，第一个是参数类型（例：MainActivity），第二个是参数名
-                    .addCode(builder.build())//方法体重的代码
+                    .addCode(builder.build())// 方法体的代码
                     .build();
 
 //            // 添加普通方法
-//            MethodSpec methodSpec2 = MethodSpec.methodBuilder("commonMethodName")//生成的方法对象
-//                    .addModifiers(Modifier.PUBLIC)//方法的修饰符
-//                    .addParameter(className, paramName)//方法中的参数，第一个是参数类型（例：MainActivity），第二个是参数名
-//                    .addCode(builder.build())//方法体重的代码
-//                    .build();
-            // 添加类
+            commonBuilder.add("android.util.Log.d(\"aa#\", msg);");
+            MethodSpec commonMethod = MethodSpec.methodBuilder("printMsg")//生成的方法对象
+                    .addModifiers(Modifier.PUBLIC)//方法的修饰符
+                    .addParameter(String.class, "msg")//方法中的参数，第一个是参数类型（例：MainActivity），第二个是参数名
+                    .addCode(commonBuilder.build())//方法体重的代码
+                    .build();
+
+            // 生成类
             TypeSpec typeSpec = TypeSpec.classBuilder(typeElement.getSimpleName().toString() + MyBindView.SUFFIX)//类对象，参数：类名
                     .addMethod(methodSpec)//添加方法
-//                    .addMethod(methodSpec2) // 添加方法二
+                    .addMethod(commonMethod) // 添加方法二
 //                    .addField(fieldSpec)//添加成员变量，我们这里不需要
                     .build();
 
-            //javaFile对象，最终用来写入的对象，参数1：包名；参数2：TypeSpec
+            // 构建文件并指定生成的文件目录, 参数1：包名；参数2：TypeSpec
             JavaFile javaFile = JavaFile.builder(packageName, typeSpec).build();
 
             try {
@@ -160,7 +185,6 @@ public class MyAnnotationProcess extends AbstractProcessor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -180,7 +204,7 @@ public class MyAnnotationProcess extends AbstractProcessor {
         Types typeUtils = processingEnv.getTypeUtils();
         List<? extends TypeMirror> typeMirrors = typeUtils.directSupertypes(typeMirror);
         for (TypeMirror mirror : typeMirrors) {
-            System.out.println("class: "+mirror.toString());
+            loggerInfo("class: "+mirror.toString());
             if ("android.app.Activity".equals(mirror.toString())) {
                 return true;
             }
@@ -189,5 +213,9 @@ public class MyAnnotationProcess extends AbstractProcessor {
             }
         }
         return false;
+    }
+
+    public void loggerInfo(String msg) {
+        mMessager.printMessage(Diagnostic.Kind.NOTE, msg);
     }
 }

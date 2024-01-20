@@ -18,7 +18,7 @@ rootProject.name = "Android_Theory"
 include ':aidl_demo'
 //include ':recurring_bug_demo'
 include ':test_demo'
-include ':kotlin_demo'
+//include ':kotlin_demo'
 //include ':gradle_demo'
 //include ':multi_flavor_demo_test'
 //include ':app'

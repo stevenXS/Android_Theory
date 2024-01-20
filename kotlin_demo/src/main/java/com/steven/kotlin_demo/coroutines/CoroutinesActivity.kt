@@ -45,8 +45,9 @@ class CoroutinesActivity: AppCompatActivity() {
          *   顶层协程，application退出后其launch块代码无法被执行，该协程一般用于测试使用
          */
         GlobalScope.launch{
+            println("it's global scope1")
             delay(3000)
-            println("it's global scope")
+            println("it's global scope2")
             printNum()
         }
 

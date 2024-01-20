@@ -1,8 +1,10 @@
-package com.example.design_pattern.decorator;
+package com.example.design_pattern.decorator.decorator;
 
 import android.util.Log;
 
-public class Decorator extends Component{
+import com.example.design_pattern.decorator.Component;
+
+public class Decorator extends Component {
     private Component obj;
 
     public Decorator(Component component) {
